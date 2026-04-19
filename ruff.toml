@@ -1,0 +1,58 @@
+target-version = "py313"
+line-length = 120 # Максимальная длина строки для кода
+
+src = ["."]
+
+[lint]
+ignore = [
+    "E302", # Конфликтует с formatter
+    "E203", # Конфликтует с formatter
+    "D100", # Missing docstring in public module
+    "D101", # Missing docstring in public class
+    "D102", # Missing docstring in public method
+    "D103", # Missing docstring in public function
+    "D104", # Missing docstring in public package
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in __init__
+    "D205", # Форматирование многострочных docstring
+    "D203", # Конфликтует с D211
+    "D213", # Конфликтует с D212
+    "D401", # Требование писать первую строку docstring в повелительном наклонении
+    "D404", # Требование к первому слову docstring
+    "ANN", # Аннотации типов проверяются mypy
+    "B024", # Осознанно допускается базовый класс без абстрактных методов
+    "ERA001", # Закомментированный код не влияет на выполнение
+    "FBT001", # Булевый позиционный аргумент допустим в существующем API
+    "FBT002", # Булевое значение по умолчанию допустимо в существующем API
+    "N811", # Стиль имени импортированной константы
+    "N818", # Суффикс Error у исключений является соглашением об именовании
+    "INP001", # Namespace packages допустимы для src-layout
+    "PLR2004", # Magic values являются вопросом читаемости
+    "COM812", # Конфликтует с formatter
+    "RUF001", # Разрешаем кириллицу в коде/докстрингах
+    "RUF002", # Разрешаем русский язык
+    "RUF003", # Разрешаем русский язык
+    "S110", # try-except-pass
+]
+select = ["ALL"]
+exclude = [
+    "**/test/**",
+    "**/tests/**",
+    "**/migrations/**"
+]
+
+# Настройки форматтера
+[format]
+quote-style = "double"
+indent-style = "space"
+
+[lint.isort]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+no-lines-before = [] # убрать лишние пустые строки перед секциями
+combine-as-imports = true
+known-third-party = [
+    "pydantic",
+    "redis",
+    "fastapi",
+    "httpx",
+]

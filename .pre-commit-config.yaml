@@ -1,0 +1,75 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+        exclude: ^front/tsconfig(\..+)?\.json$
+      - id: check-toml
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: debug-statements
+        files: ^(backend|tgbot)/.*\.py$
+      - id: check-ast
+        files: ^(backend|tgbot)/.*\.py$
+      - id: no-commit-to-branch
+        args: [ --branch=main ]
+
+  # Frontend
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        files: ^front/.*\.(ts|tsx|js|jsx|json|css|md|yml|yaml)$
+        additional_dependencies:
+          - prettier
+          - prettier-plugin-tailwindcss
+
+  - repo: local
+    hooks:
+      - id: frontend-eslint
+        name: frontend eslint
+        entry: bash -c "cd front && npm run lint:fix"
+        language: system
+        pass_filenames: false
+        files: ^front/.*\.(ts|tsx|js|jsx)$
+
+      - id: frontend-typecheck
+        name: frontend typecheck
+        entry: bash -c "cd front && npm run typecheck"
+        language: system
+        pass_filenames: false
+        files: ^front/.*\.(ts|tsx)$
+
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.14
+    hooks:
+      - id: ruff-format
+
+      - id: ruff-check
+        args: [ --fix ]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.18.2
+    hooks:
+      - id: mypy
+        entry: python -X utf8 -m mypy
+        additional_dependencies:
+          - pydantic
+          - types-requests
+          - types-python-dateutil
+          - types-PyYAML
+
+  # Dockerfile lint
+  - repo: https://github.com/AleksaC/hadolint-py
+    rev: v2.14.0
+    hooks:
+      - id: hadolint
+        files: (^|/)(Dockerfile|Dockerfile\..*)$
+        args: [ --ignore, DL3025, --ignore, DL3018 ]

@@ -1,0 +1,50 @@
+{
+  "uid": "datingbot-frontend",
+  "title": "Frontend Overview",
+  "tags": ["datingbot", "frontend"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Frontend Container CPU",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".*front.*|.*frontend.*\"}[5m]))", "refId": "A"}],
+      "fieldConfig": {"defaults": {"unit": "cores"}, "overrides": []},
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Frontend CPU",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (name) (rate(container_cpu_usage_seconds_total{name=~\".*front.*|.*frontend.*\"}[5m]))", "legendFormat": "{{name}}", "refId": "A"}],
+      "fieldConfig": {"defaults": {"unit": "cores"}, "overrides": []},
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4}
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Frontend Memory",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (name) (container_memory_working_set_bytes{name=~\".*front.*|.*frontend.*\"})", "legendFormat": "{{name}}", "refId": "A"}],
+      "fieldConfig": {"defaults": {"unit": "bytes"}, "overrides": []},
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4}
+    },
+    {
+      "id": 4,
+      "type": "logs",
+      "title": "Recent Frontend Logs",
+      "datasource": {"type": "loki", "uid": "loki"},
+      "targets": [{"expr": "{service=~\"front|frontend\",environment=\"dev\"}", "refId": "A"}],
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 12}
+    }
+  ]
+}

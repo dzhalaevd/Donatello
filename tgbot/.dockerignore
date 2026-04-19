@@ -1,0 +1,16 @@
+.dockerignore
+.env
+.git
+.gitignore
+.idea
+.mypy_cache
+.proxy_cache.json
+.pytest_cache
+.python-version
+.ruff_cache
+.venv
+Dockerfile
+__pycache__
+bot.conf
+tests
+*.py[cod]
