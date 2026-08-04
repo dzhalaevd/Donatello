@@ -20,6 +20,11 @@ repos:
       - id: no-commit-to-branch
         args: [ --branch=main ]
 
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
   # Frontend
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8

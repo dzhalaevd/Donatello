@@ -102,7 +102,7 @@ services:
     restart: unless-stopped
     command: >
       start-from-init
-      --masterkey "MasterkeyNeedsToHave32Characters"
+      --masterkey "${ZITADEL_MASTER_KEY:?Set ZITADEL_MASTER_KEY in deploy/local/.env}"
       --tlsMode disabled
     ports:
       - "8080:8080"
@@ -114,9 +114,9 @@ services:
       ZITADEL_DATABASE_POSTGRES_PORT: 5432
       ZITADEL_DATABASE_POSTGRES_DATABASE: zitadel
       ZITADEL_DATABASE_POSTGRES_USER_USERNAME: zitadel
-      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: ${ZITADEL_DB_PASSWORD:?Set ZITADEL_DB_PASSWORD in deploy/local/.env}
       ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: admin
-      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: Admin123!
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: ${ZITADEL_ADMIN_PASSWORD:?Set ZITADEL_ADMIN_PASSWORD in deploy/local/.env}
       ZITADEL_FIRSTINSTANCE_ORG_HUMAN_NAME: Admin
       ZITADEL_FIRSTINSTANCE_ORG_HUMAN_GIVENNAME: Admin
       ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_ADDRESS: admin@example.com
@@ -130,7 +130,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: zitadel
-      POSTGRES_PASSWORD: zitadel
+      POSTGRES_PASSWORD: ${ZITADEL_DB_PASSWORD:?Set ZITADEL_DB_PASSWORD in deploy/local/.env}
       POSTGRES_DB: zitadel
     volumes:
       - zitadel_postgres_data:/var/lib/postgresql/data
@@ -162,7 +162,7 @@ services:
       - "3000:3000"
     environment:
       GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
-      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Set GRAFANA_ADMIN_PASSWORD in deploy/local/.env}
       GF_USERS_ALLOW_SIGN_UP: "false"
     volumes:
       - grafana-data:/var/lib/grafana

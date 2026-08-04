@@ -31,6 +31,15 @@ arch/         Product and architecture notes
 
 ## Start Local Infrastructure
 
+Create the ignored local environment file before starting Compose:
+
+```bash
+cp deploy/local/.env.example deploy/local/.env
+```
+
+Fill every password field in `deploy/local/.env`. Generate a 32-character Zitadel master key with
+`openssl rand -hex 16` and generate independent passwords rather than reusing one value across services.
+
 The `infra-up` target selects infrastructure services from the full local Compose file:
 
 - `backend-db` on `localhost:5432`
@@ -51,12 +60,12 @@ Stop it with:
 make infra-down
 ```
 
-Local Zitadel defaults from `deploy/local/docker-compose-full.yml`:
+Local Zitadel credentials come from `deploy/local/.env`:
 
 ```text
 URL: http://localhost:8080
 Username: admin
-Password: Admin123!
+Password: value of ZITADEL_ADMIN_PASSWORD
 ```
 
 Local backend database defaults from `deploy/local/docker-compose-full.yml`:
@@ -65,7 +74,7 @@ Local backend database defaults from `deploy/local/docker-compose-full.yml`:
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 POSTGRES_USER=backend
-POSTGRES_PASSWORD=backend
+POSTGRES_PASSWORD=
 POSTGRES_DB=backend
 ```
 
@@ -77,7 +86,7 @@ Create `backend/.env` with the variables used by the current backend config:
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 POSTGRES_USER=backend
-POSTGRES_PASSWORD=backend
+POSTGRES_PASSWORD=
 POSTGRES_DB=backend
 
 ZITADEL_ISSUER=http://localhost:8080
@@ -108,10 +117,10 @@ Migration files live in `backend/src/infra/migrations`.
 
 Before relying on Alembic commands, verify that `backend/alembic.ini` points to the current migration path and database URL. The repository currently has infrastructure for Alembic, but the config may need syncing with the current module layout before `alembic upgrade head` is used in a fresh environment.
 
-Expected database URL for the local compose database:
+The local database URL is assembled from the `POSTGRES_*` values in `deploy/local/.env`.
 
 ```text
-postgresql+asyncpg://backend:backend@localhost:5432/backend
+postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}
 ```
 
 Migration commands are exposed through the root Makefile:
@@ -182,7 +191,7 @@ The available local Compose file contains the full application and monitoring st
 services are required:
 
 ```bash
-docker compose -f deploy/local/docker-compose-full.yml up -d
+docker compose --env-file deploy/local/.env -f deploy/local/docker-compose-full.yml up -d
 ```
 
 Open:
@@ -199,7 +208,7 @@ Grafana defaults:
 
 ```dotenv
 GRAFANA_ADMIN_USER=admin
-GRAFANA_ADMIN_PASSWORD=admin
+GRAFANA_ADMIN_PASSWORD=
 ```
 
 Enable app instrumentation with:

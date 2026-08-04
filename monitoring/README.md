@@ -41,7 +41,7 @@ Grafana uses these default local credentials unless overridden:
 
 ```dotenv
 GRAFANA_ADMIN_USER=admin
-GRAFANA_ADMIN_PASSWORD=admin
+GRAFANA_ADMIN_PASSWORD=
 ```
 
 ## Application Metrics

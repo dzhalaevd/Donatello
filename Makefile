@@ -5,6 +5,7 @@ TGBOT_DIR := tgbot
 FRONT_DIR := front
 COMPOSE ?= docker compose
 COMPOSE_FILE := deploy/local/docker-compose-full.yml
+COMPOSE_ENV_FILE := deploy/local/.env
 INFRA_SERVICES := backend-db zitadel zitadel-db redis nats
 
 .DEFAULT_GOAL := help
@@ -113,10 +114,10 @@ build-front: ## Build the frontend production bundle
 verify-front: lint-front typecheck-front build-front ## Run all configured frontend checks
 
 infra-up: ## Start local databases, identity provider, Redis, and NATS
-	$(COMPOSE) -f $(COMPOSE_FILE) up -d $(INFRA_SERVICES)
+	$(COMPOSE) --env-file $(COMPOSE_ENV_FILE) -f $(COMPOSE_FILE) up -d $(INFRA_SERVICES)
 
 infra-down: ## Stop the local Compose project without deleting volumes
-	$(COMPOSE) -f $(COMPOSE_FILE) down
+	$(COMPOSE) --env-file $(COMPOSE_ENV_FILE) -f $(COMPOSE_FILE) down
 
 infra-logs: ## Follow local infrastructure logs
-	$(COMPOSE) -f $(COMPOSE_FILE) logs -f $(INFRA_SERVICES)
+	$(COMPOSE) --env-file $(COMPOSE_ENV_FILE) -f $(COMPOSE_FILE) logs -f $(INFRA_SERVICES)
