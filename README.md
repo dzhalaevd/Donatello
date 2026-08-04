@@ -1,6 +1,6 @@
 <div align="center">
 
-# Make Dating Free Again
+# Make Dating Great Again
 
 **A dating product experiment focused on meaningful relationships, not endless engagement.**
 
@@ -16,11 +16,11 @@
 | 🏗️ This project is currently under development and is **not ready for production use**. |
 |------------------------------------------------------------------------------------------|
 
-## :mag: Vision
+## :mag: About
 
 Most dating applications optimize for engagement.
 
-**Make Dating Free Again** explores a different approach:
+**Make Dating Great Again** explores a different approach:
 
 - Reduce dating-app burnout
 - Encourage intentional interactions
@@ -35,6 +35,7 @@ Success is measured by helping people form genuine connections and eventually le
 
 ![Python][python-shield]
 ![uv][uv-shield]
+![wps][wemake-shield]
 ![FastAPI][fastapi-shield]
 ![SQLAlchemy][sqlalchemy-shield]
 ![Pytest][pytest-shield]
@@ -48,25 +49,13 @@ Success is measured by helping people form genuine connections and eventually le
 ![Prometheus][prometheus-shield]
 ![Docker][docker-shield]
 
-## :bricks: Structure
 
-This repository is a monorepo with several app surfaces:
-
-- `backend/` — FastAPI backend, authentication, user identity and domain modules
-- `tgbot/` — Telegram bot built on aiogram
-- `front/` — React + Vite frontend shell
-- `monitoring/` — Local Grafana, Prometheus, Loki, Tempo and OpenTelemetry setup
-- `postgres/` — Database-related project files
-- `arch/` — Product and architecture notes
-- `skills/` — Project-specific development notes for agents
-
-## :rocket: Getting Started
+## :rocket: Quickstart
 
 See:
 
 - [DEVELOPMENT.md](DEVELOPMENT.md) — local development setup
 - [README.md](README.md) — project overview
-- [arch/](arch/00-overview.md) — architecture and product documentation
 
 <div align="center">
 
@@ -122,3 +111,5 @@ If you find this project interesting, consider giving it a ⭐
 [prometheus-shield]: https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=white
 
 [docker-shield]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
+
+[wemake-shield]: https://img.shields.io/badge/style-wemake-%23000000.svg?style=for-the-badge&logo=python&logoColor=white

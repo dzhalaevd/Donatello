@@ -14,9 +14,9 @@ Install:
 - Git
 - A Telegram bot token if you run `tgbot`
 
-Python versions currently differ by service:
+Both Python services require Python 3.13:
 
-- `backend` requires Python `>=3.11`
+- `backend` requires Python `>=3.13`
 - `tgbot` requires Python `>=3.13,<4.0`
 
 ## Repository Layout
@@ -31,25 +31,27 @@ arch/         Product and architecture notes
 
 ## Start Local Infrastructure
 
-The development compose file starts infrastructure only:
+The `infra-up` target selects infrastructure services from the full local Compose file:
 
 - `backend-db` on `localhost:5432`
 - `zitadel` on `localhost:8080`
 - `zitadel-db` for Zitadel storage
+- `redis` on `localhost:6379`
+- `nats` on `localhost:4222`
 
 Run:
 
 ```bash
-docker compose -f compose-dev.yml up -d
+make infra-up
 ```
 
 Stop it with:
 
 ```bash
-docker compose -f compose-dev.yml down
+make infra-down
 ```
 
-Local Zitadel defaults from `compose-dev.yml`:
+Local Zitadel defaults from `deploy/local/docker-compose-full.yml`:
 
 ```text
 URL: http://localhost:8080
@@ -57,7 +59,7 @@ Username: admin
 Password: Admin123!
 ```
 
-Local backend database defaults from `compose-dev.yml`:
+Local backend database defaults from `deploy/local/docker-compose-full.yml`:
 
 ```dotenv
 POSTGRES_HOST=localhost
@@ -88,12 +90,11 @@ TELEGRAM_BOT_TOKEN=
 TELEGRAM_AUTH_TTL_SECONDS=86400
 ```
 
-Install dependencies and run:
+Install dependencies and run from the repository root:
 
 ```bash
-cd backend
-uv sync --dev
-uv run python src/main.py
+make install-backend
+make run-backend
 ```
 
 Open:
@@ -113,6 +114,14 @@ Expected database URL for the local compose database:
 postgresql+asyncpg://backend:backend@localhost:5432/backend
 ```
 
+Migration commands are exposed through the root Makefile:
+
+```bash
+make migrate-backend
+make migration-check-backend
+make migration-backend message="add user status"
+```
+
 ## Telegram Bot
 
 Create `tgbot/.env`:
@@ -128,17 +137,14 @@ The legacy example also contains variables for database, Redis, maps and payment
 Run polling mode:
 
 ```bash
-cd tgbot
-uv sync --dev
-uv run python src/run_polling.py
+make install-tgbot
+make run-tgbot-polling
 ```
 
 Run webhook app:
 
 ```bash
-cd tgbot
-uv sync --dev
-uv run python src/run_webhook.py
+make run-tgbot-webhook
 ```
 
 The webhook app listens on `http://localhost:8000` by default, so do not run it on the same port as the backend unless you change one of the ports.
@@ -148,9 +154,8 @@ The webhook app listens on `http://localhost:8000` by default, so do not run it 
 Install and run:
 
 ```bash
-cd front
-npm install
-npm run dev
+make install-front
+make run-front
 ```
 
 Open:
@@ -160,9 +165,9 @@ Open:
 Other commands:
 
 ```bash
-npm run lint
-npm run build
-npm run preview
+make lint-front
+make typecheck-front
+make build-front
 ```
 
 The frontend is currently a Vite/React shell. Treat it as the product UI surface, but expect application screens to be built out over time.
@@ -173,8 +178,11 @@ Regular local development does not require the monitoring stack.
 
 Start infrastructure plus observability:
 
+The available local Compose file contains the full application and monitoring stack. Start it directly when all
+services are required:
+
 ```bash
-docker compose -f compose-dev.yml -f compose-monitoring.yml up -d
+docker compose -f deploy/local/docker-compose-full.yml up -d
 ```
 
 Open:
@@ -214,33 +222,29 @@ More details are in [monitoring/README.md](monitoring/README.md).
 
 ## Tests And Checks
 
-Backend:
+Run all configured read-only checks:
 
 ```bash
-cd backend
-uv run pytest
-uv run ruff format .
-uv run ruff check .
-uv run mypy .
+make verify
 ```
 
-Telegram bot:
+Or run checks for one application area:
 
 ```bash
-cd tgbot
-uv run pytest
-uv run ruff format .
-uv run ruff check .
-uv run mypy .
+make verify-backend
+make verify-tgbot
+make verify-front
 ```
 
-Frontend:
+Formatting is intentionally separate because it changes files:
 
 ```bash
-cd front
-npm run lint
-npm run build
+make format
+make format-check
 ```
+
+The frontend currently has no test script. The backend currently has no declared mypy dependency, so its verification
+does not claim to run type checking. `make help` lists the complete supported command API.
 
 GitHub Actions CI uses these same `make verify-*` targets and runs only the application areas affected by a change.
 For branch protection, configure `CI success` as the single required check; it accepts application jobs that were

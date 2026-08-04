@@ -1,191 +1,147 @@
-# Product Principles
+# AGENTS.md
 
-## Mission
+This file contains repository-specific instructions for coding agents. It applies to the entire repository unless a
+more specific `AGENTS.md` exists in a subdirectory.
 
-Make Dating Free Again exists to reduce dating-app burnout and
-maximize the probability of meaningful offline relationships.
+## Load Context Selectively
 
-The product should help users leave the app successfully,
-not maximize time spent inside the platform.
+Read only the documents relevant to the task:
 
----
+| Task concerns | Canonical document |
+|---|---|
+| Product problem, audience, or intended outcome | [`arch/product/vision.md`](arch/product/vision.md) |
+| Product beliefs and value judgments | [`arch/product/philosophy.md`](arch/product/philosophy.md) |
+| Product decision rules and guardrails | [`arch/product/principles.md`](arch/product/principles.md) |
+| Research findings and evidence limits | [`arch/product/research.md`](arch/product/research.md) |
+| Domain terminology | [`arch/product/glossary.md`](arch/product/glossary.md) |
+| System structure, runtime relationships, data ownership, or known technical gaps | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
+| Local setup and environment variables | [`DEVELOPMENT.md`](DEVELOPMENT.md) |
+| Available repository commands | [`Makefile`](Makefile) |
 
-# Problem Statement
+Before changing a domain concept, read the glossary and relevant product document. Before changing a technical seam,
+runtime process, persistence path, or external integration, read the architecture document and relevant source files.
 
-Modern dating platforms optimize primarily for engagement,
-retention and monetization.
+The codebase is in transition. Prefer current source code, dependency manifests, migrations, and executable
+configuration over documentation when they disagree, then update the stale document in the same change.
 
-This creates several harmful effects:
+## Working Rules
 
-- choice overload
-- decision fatigue
-- emotional dependency loops
-- compulsive usage patterns
-- low-quality interactions
-- reduced trust
-- dating burnout
+- Preserve existing user changes. The worktree may already be dirty; do not revert, overwrite, stage, or reformat
+  unrelated files.
+- Keep changes scoped to the requested application area. Do not couple `backend`, `tgbot`, and `front` merely to reuse a
+  small implementation detail.
+- Read the files being changed, their tests, and one relevant existing pattern before implementation.
+- Add or update tests for behavior changes. For a bug fix, reproduce the bug with a failing test first when practical.
+- Do not commit secrets or real credentials. `.env` files are local-only; use placeholders in documentation and
+  fixtures.
+- Do not change a database schema without an Alembic migration. Inspect existing migrations before choosing revision
+  dependencies or naming conventions.
+- Keep public HTTP behavior backward-compatible unless the task explicitly changes the contract.
+- Do not add personal data, tokens, message text, user IDs, chat IDs, or unbounded values as metric or log labels.
+- Report checks that could not run and the concrete reason. Never describe an unexecuted check as passing.
 
-Research indicates that excessive profile exposure and
-gamified interaction models reduce satisfaction and increase
-emotional exhaustion.
+## Backend Work
 
----
+- Use Python 3.13 and the isolated `backend` uv environment.
+- Follow the dependency direction and module seams documented in
+  [`ARCHITECTURE.md`](ARCHITECTURE.md#architectural-style).
+- Keep REST controllers thin: validate and translate HTTP data, invoke an application operation, and translate the
+  result.
+- Do not put SQLAlchemy queries, provider-specific token logic, or business decisions in controllers.
+- Obtain application dependencies through Dishka providers rather than constructing sessions or collaborators in
+  controllers.
+- Keep transaction ownership explicit through the application operation and unit-of-work/session seam.
 
-# Core Product Philosophy
+Use the root Makefile:
 
-The system should optimize for:
+```bash
+make install-backend
+make run-backend
+make test-backend
+make verify-backend
+```
 
-- meaningful interactions
-- emotional well-being
-- intentional usage
-- trust and transparency
-- real-world meetings
-- reduced cognitive load
+The backend has no configured type checker. Do not borrow one from the Telegram environment or invent a
+`typecheck-backend` check.
 
-The system should NOT optimize for:
+Backend pytest imports `tests.fixtures.db` as a plugin. If collection cannot resolve `tests`, diagnose the package and
+test-path setup instead of weakening discovery or hiding the import error.
 
-- session duration
-- addictive engagement
-- swipe volume
-- compulsive return behavior
-- infinite interaction loops
+## Telegram Bot Work
 
----
+- Use Python 3.13 and the isolated `tgbot` uv environment.
+- Keep handlers focused on Telegram interaction and delegate reusable behavior to application-facing modules.
+- Do not perform network calls at module import time.
+- Preserve polling and webhook startup modes unless the task explicitly removes one.
+- Do not run polling and webhook consumption for the same bot token simultaneously.
 
-# Product Invariants
+Use the root Makefile:
 
-These rules must remain true across all features.
+```bash
+make install-tgbot
+make run-tgbot-polling
+make run-tgbot-webhook
+make test-tgbot
+make verify-tgbot
+```
 
-## Invariants
+Some end-to-end tests require Telegram credentials and network access. Never substitute real credentials or claim those
+tests passed when the required environment is unavailable.
 
-- More usage is not inherently positive
-- Fewer, higher-quality matches are preferred
-- The app should reduce compulsive behavior
-- Users should understand why matches happen
-- The interface should reduce anxiety
-- The product must respect user attention
-- Offline interaction is the primary success outcome
+## Frontend Work
 
----
+- Use TypeScript for application code and keep React components focused.
+- Consume backend behavior through documented HTTP contracts; do not reproduce product rules in browser-only state.
+- Prefer the existing ESLint and TypeScript configuration over introducing new formatting or state-management tools.
+- Do not edit generated dependencies under `front/node_modules`.
 
-# Forbidden Patterns
+Use the root Makefile:
 
-The following patterns are prohibited:
+```bash
+make install-front
+make run-front
+make lint-front
+make typecheck-front
+make build-front
+make verify-front
+```
 
-- infinite swipe feeds
-- variable reward loops
-- streak systems
-- manipulative notifications
-- artificial scarcity mechanics
-- engagement farming
-- dopamine-driven retention mechanics
-- deceptive matching systems
-- pay-to-win visibility manipulation
+There is no frontend test script; `test-front` is intentionally absent.
 
----
+## Repository Checks
 
-# UX Philosophy
+Use the compositional root targets:
 
-The interface should feel:
+```bash
+make lint
+make format
+make format-check
+make typecheck
+make test
+make verify
+```
 
-- calm
-- intentional
-- understandable
-- emotionally safe
-- low-pressure
+The Makefile runs tools through each application's environment. Do not rely on globally installed Ruff, Flake8, pytest,
+mypy, ESLint, or TypeScript executables.
 
-The interface should avoid:
+Fix applicable violations in code. Change lint configuration only when a rule conflicts with a repository-wide design
+choice, and document that reason in the configuration. Run the smallest relevant checks first, then `verify` targets for
+every application area modified.
 
-- overstimulation
-- casino-like mechanics
-- endless decision loops
-- aggressive notifications
-- artificial urgency
+## Local Infrastructure Safety
 
----
+Use `make infra-up`, `make infra-logs`, and `make infra-down`. Starting containers is unnecessary for isolated unit
+tests. Do not modify, reset, or delete local database volumes unless the user explicitly requests it.
 
-# Matchmaking Philosophy
+The backend and Telegram webhook app both default to port 8000. Change one port before running both on the same host.
 
-Matches should prioritize:
+## Documentation Rules
 
-- compatibility
-- communication potential
-- shared intent
-- behavioral quality
-- long-term interaction probability
-
-The system should prefer:
-
-- fewer recommendations
-- better explanations
-- stronger post-match outcomes
-
-over:
-
-- maximizing match count
-
----
-
-# Decision Policy
-
-When tradeoffs appear, prioritize:
-
-1. User well-being
-2. Meaningful outcomes
-3. Trust and transparency
-4. Emotional sustainability
-5. Long-term satisfaction
-
-over:
-
-- retention metrics
-- engagement metrics
-- monetization optimization
-
----
-
-# Success Metrics
-
-Primary metrics:
-
-- meaningful conversation rate
-- offline meeting rate
-- healthy long-term retention
-- user satisfaction
-- reduced burnout indicators
-
-Secondary metrics:
-
-- lower swipe counts
-- shorter but more successful sessions
-- lower ghosting rates
-- lower compulsive usage patterns
-
-Negative metrics:
-
-- doom scrolling behavior
-- excessive session duration
-- repeated rejection loops
-- emotionally harmful engagement
-
----
-
-# AI Product Guidance
-
-When proposing features or UX flows:
-
-ALWAYS:
-
-- minimize cognitive overload
-- reduce compulsive behavior
-- encourage intentional interaction
-- preserve emotional well-being
-- explain matchmaking decisions clearly
-
-NEVER:
-
-- optimize for addiction
-- maximize screen time
-- introduce manipulative engagement systems
-- gamify loneliness
-- sacrifice well-being for retention
+- Update setup documentation when environment variables or operator workflows change.
+- Update `ARCHITECTURE.md` when runtime relationships, module seams, data ownership, external systems, or known gaps
+  change.
+- Update the one owning product document when product meaning changes; link to it instead of copying its claims.
+- Keep examples copy-pasteable and use repository-relative paths in documentation.
+- Record hard-to-reverse, surprising technical trade-offs as ADRs under `arch/adr/`; do not use ADRs for routine changes.
+- Explain non-obvious implementation constraints close to the code, but do not bury product or architectural decisions
+  in comments.
