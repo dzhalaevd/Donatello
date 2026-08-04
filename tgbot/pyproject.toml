@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "Dating Telegram Bot with open source code"
 readme = "README.md"
 requires-python = ">=3.13,<4.0"
-license = "Attribution-NonCommercial 3.0 Unported"
+license = "Apache-2.0"
 authors = [
     { name = "David Dzhalaev", email = "72649244+DavidRomanovizc@users.noreply.github.com" }
 ]

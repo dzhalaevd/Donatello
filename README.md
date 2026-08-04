@@ -56,6 +56,14 @@ See:
 - [DEVELOPMENT.md](DEVELOPMENT.md) — local development setup
 - [README.md](README.md) — project overview
 
+## :scroll: Licensing
+
+- Source code and configuration are licensed under the [Apache License 2.0](LICENSE).
+- Repository-authored documentation is licensed under
+  [Creative Commons Attribution 4.0 International](LICENSE-DOCS.md).
+- Third-party images, logos, trademarks, and other identified materials remain
+  subject to their respective owners' terms.
+
 <div align="center">
 
 ### Works on Open-Source
