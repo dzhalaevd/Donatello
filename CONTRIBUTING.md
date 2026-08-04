@@ -6,6 +6,13 @@ in [PEP 8](https://peps.python.org/pep-0008/#:~:text=Use%20the%20function%20nami
 Thank you for your interest in contributing to our Python project! Below are the steps to guide you through becoming a
 part of our developer community.
 
+#### Licensing Contributions
+
+By submitting a contribution, you agree that source code and configuration are provided under the
+[Apache License 2.0](LICENSE), while repository-authored documentation is provided under the
+[Creative Commons Attribution 4.0 International License](LICENSE-DOCS.md), unless a file contains a different license
+notice. You must have the right to submit the contribution under these terms.
+
 #### 1. Fork the Project
 
 Visit the repository page on GitHub and click the "Fork" button in the upper right corner. This action will create a
