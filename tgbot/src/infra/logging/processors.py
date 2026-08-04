@@ -30,7 +30,7 @@ def additionally_serialize(obj: object) -> Any:
 
 def serialize_to_json(data: Any) -> str:
     safe_data = make_json_safe(data)
-    return cast("str", orjson.dumps(safe_data, default=additionally_serialize).decode())
+    return orjson.dumps(safe_data, default=additionally_serialize).decode()
 
 
 def get_render_processor(

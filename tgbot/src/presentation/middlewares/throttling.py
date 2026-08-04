@@ -1,14 +1,17 @@
 import logging
 import time
 from typing import (
+    TYPE_CHECKING,
     Any,
     ClassVar,
+    cast,
 )
 
 from aiogram import (
     BaseMiddleware,
     types,
 )
+from aiogram.types import TelegramObject
 from bot_types import (
     Handler,
 )
@@ -18,6 +21,9 @@ from .exceptions import (
     CancelHandler,
     Throttled,
 )
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +41,10 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         super().__init__()
 
-    async def __call__(self, handler: Handler, event: types.Message, data: dict[str, Any]) -> Any:
+    async def __call__(self, handler: Handler, event: TelegramObject, data: dict[str, Any]) -> Any:
+        if not isinstance(event, types.Message):
+            return await handler(event, data)
+
         try:
             await self.on_process_event(event)
         except CancelHandler:
@@ -50,7 +59,10 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         return result
 
-    async def on_process_event(self, event: types.Message) -> Any:
+    async def on_process_event(self, event: types.Message) -> None:
+        if event.from_user is None:
+            return
+
         limit = self.rate_limit
         key = f"{self.prefix}_message"
 
@@ -79,10 +91,10 @@ class ThrottleManager:
         now = time.time()
         bucket_name = f"throttle_{key}_{user_id}_{chat_id}"
 
-        data = await self.redis.hmget(bucket_name, self.bucket_keys)
+        redis_data = await cast("Awaitable[list[Any]]", self.redis.hmget(bucket_name, self.bucket_keys))
         data = {
             k: float(v.decode()) if isinstance(v, bytes) else v
-            for k, v in zip(self.bucket_keys, data, strict=False)
+            for k, v in zip(self.bucket_keys, redis_data, strict=False)
             if v is not None
         }
         called = data.get("LAST_CALL", now)
@@ -97,7 +109,7 @@ class ThrottleManager:
         else:
             data["EXCEEDED_COUNT"] = 1
 
-        await self.redis.hset(bucket_name, mapping=data)
+        await cast("Awaitable[int]", self.redis.hset(bucket_name, mapping=data))
 
         if not result:
             raise Throttled(
@@ -107,6 +119,6 @@ class ThrottleManager:
                 rate=rate,
                 delta=delta,
                 called_at=now,
-                exceeded_count=data.get("EXCEEDED_COUNT", 0),
+                exceeded_count=int(data.get("EXCEEDED_COUNT", 0)),
             )
         return result

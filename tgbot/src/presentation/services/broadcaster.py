@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from collections.abc import Sequence
 
 from aiogram import Bot, exceptions
 from aiogram.types import InlineKeyboardMarkup
@@ -12,7 +13,7 @@ async def send_message(
     user_id: int | str,
     text: str,
     disable_notification: bool = False,
-    reply_markup: InlineKeyboardMarkup = None,
+    reply_markup: InlineKeyboardMarkup | None = None,
 ) -> bool:
     """Safe messages sender.
 
@@ -50,10 +51,10 @@ async def send_message(
 
 async def broadcast(
     bot: Bot,
-    users: list[str | int],
+    users: Sequence[str | int],
     text: str,
     disable_notification: bool = False,
-    reply_markup: InlineKeyboardMarkup = None,
+    reply_markup: InlineKeyboardMarkup | None = None,
 ) -> int:
     """Simple broadcaster.
     :param bot: Bot instance.

@@ -53,7 +53,7 @@ flowchart LR
 | [`backend/src`](backend/src/)     | FastAPI entry point, REST presentation, application modules, persistence, identity adapters, logging, and telemetry |
 | [`backend/tests`](backend/tests/) | Backend test and PostgreSQL fixture scaffolding                                                                     |
 | [`tgbot/src`](tgbot/src/)         | Telegram entry points, handlers, middleware, integrations, configuration, and webhook transport                     |
-| [`tgbot/tests`](tgbot/tests/)     | Telegram end-to-end fixture scaffolding                                                                             |
+| [`tgbot/tests`](tgbot/tests/)     | Telegram webhook contract tests and a reserved package for credentialed end-to-end scenarios                        |
 | [`front/src`](front/src/)         | React application source                                                                                            |
 | [`deploy/local`](deploy/local/)   | Local Docker Compose topology                                                                                       |
 | [`monitoring`](monitoring/)       | Grafana, Prometheus, OpenTelemetry Collector, Tempo, Loki, Promtail, and cAdvisor configuration                     |

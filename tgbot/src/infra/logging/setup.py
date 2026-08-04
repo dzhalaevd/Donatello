@@ -1,10 +1,14 @@
 import logging
 import sys
+from typing import TYPE_CHECKING
 
 import structlog
 from structlog.processors import CallsiteParameter, CallsiteParameterAdder
 
 from .processors import get_render_processor
+
+if TYPE_CHECKING:
+    from structlog.typing import Processor
 
 DEFAULT_EXCLUDED_ACCESS_LOG_PATHS = ("/metrics",)
 
@@ -39,7 +43,7 @@ def configure_logging(
         logger.handlers.clear()
         logger.propagate = True
 
-    common_processors = [
+    common_processors: list[Processor] = [
         structlog.contextvars.merge_contextvars,
         structlog.stdlib.add_logger_name,
         structlog.stdlib.add_log_level,
@@ -56,7 +60,7 @@ def configure_logging(
         ),
     ]
 
-    structlog_processors = [
+    structlog_processors: list[Processor] = [
         structlog.stdlib.ProcessorFormatter.wrap_for_formatter,
     ]
     formatter = structlog.stdlib.ProcessorFormatter(
