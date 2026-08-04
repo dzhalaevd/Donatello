@@ -242,6 +242,10 @@ npm run lint
 npm run build
 ```
 
+GitHub Actions CI uses these same `make verify-*` targets and runs only the application areas affected by a change.
+For branch protection, configure `CI success` as the single required check; it accepts application jobs that were
+legitimately skipped by the path filters and fails when any job that did run was unsuccessful.
+
 Repository hooks:
 
 ```bash
