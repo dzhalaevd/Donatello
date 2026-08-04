@@ -167,6 +167,9 @@ jobs:
 
       - name: Run pre-commit
         run: make verify-pre-commit
+        env:
+          # Branch protection belongs to local commits, not repository-wide CI checks.
+          SKIP: no-commit-to-branch
 
   ci-success:
     name: CI success
