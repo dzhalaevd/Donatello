@@ -10,7 +10,7 @@ class DbConfig:
     """Database configuration class.
     This class holds the settings for the database, such as host, password, port, etc.
 
-    Attributes
+    Attributes:
     ----------
     host : str
         The host where the database server is located.
@@ -40,7 +40,11 @@ class DbConfig:
 
     @staticmethod
     def from_env(env: Env) -> "DbConfig":
-        """Creates the DbConfig object from environment variables."""
+        """Creates the DbConfig object from environment variables.
+
+        Returns:
+            Database configuration populated from the environment.
+        """
         host = env.str("POSTGRES_HOST")
         password = env.str("POSTGRES_PASSWORD")
         user = env.str("POSTGRES_USER")
@@ -61,7 +65,11 @@ class DbConfig:
         host: str | None = None,
         port: int | None = None,
     ) -> str:
-        """Constructs and returns a SQLAlchemy URL for this database configuration."""
+        """Constructs a SQLAlchemy URL for this database configuration.
+
+        Returns:
+            SQLAlchemy connection URL.
+        """
         if not host:
             host = self.host
         if not port:

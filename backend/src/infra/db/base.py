@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 
 from sqlalchemy import MetaData, sql
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, registry
@@ -25,8 +25,8 @@ class TimedBaseModel(BaseModel):
 
     __abstract__ = True
 
-    created_at: Mapped[datetime.datetime] = mapped_column(nullable=False, server_default=sql.func.now())
-    updated_at: Mapped[datetime.datetime] = mapped_column(
+    created_at: Mapped[dt.datetime] = mapped_column(nullable=False, server_default=sql.func.now())
+    updated_at: Mapped[dt.datetime] = mapped_column(
         nullable=False,
         server_default=sql.func.now(),
         onupdate=sql.func.now(),

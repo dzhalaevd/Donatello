@@ -16,9 +16,10 @@ async def build_sa_engine(db_config: DbConfig) -> AsyncGenerator[AsyncEngine]:
         json_deserializer=orjson.loads,
         pool_size=50,
     )
-    yield engine
-
-    await engine.dispose()
+    try:
+        yield engine
+    finally:
+        await engine.dispose()
 
 
 def build_sa_session_factory(engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:

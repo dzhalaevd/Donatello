@@ -202,6 +202,10 @@ class OidcTokenVerifier:
             msg = "OIDC token header has no key id"
             raise InvalidCredentials(msg)
 
+        jwk = await self._get_casdoor_jwk(issuer, kid)
+        return self._decode_casdoor_token(token, jwk, issuer)
+
+    async def _get_casdoor_jwk(self, issuer: str, kid: str) -> dict[str, Any]:
         async with httpx.AsyncClient(timeout=self._settings.http_timeout_seconds) as client:
             config_response = await client.get(f"{issuer}/.well-known/openid-configuration")
             if config_response.status_code >= 400:
@@ -216,7 +220,9 @@ class OidcTokenVerifier:
         if jwk is None:
             msg = "OIDC token key is not present in JWKS"
             raise InvalidCredentials(msg)
+        return cast("dict[str, Any]", jwk)
 
+    def _decode_casdoor_token(self, token: str, jwk: dict[str, Any], issuer: str) -> dict[str, Any]:
         try:
             key = RSAAlgorithm.from_jwk(json.dumps(jwk))
             return cast(

@@ -1,5 +1,5 @@
+import datetime as dt
 from dataclasses import dataclass
-from datetime import datetime
 from enum import StrEnum
 from uuid import UUID
 
@@ -20,8 +20,8 @@ class AuthProvider(StrEnum):
 class User:
     id: UUID
     status: UserStatus
-    created_at: datetime
-    updated_at: datetime
+    created_at: dt.datetime
+    updated_at: dt.datetime
 
 
 @dataclass(frozen=True)
@@ -32,8 +32,8 @@ class AuthIdentity:
     subject: str
     email: str | None
     username: str | None
-    created_at: datetime
-    updated_at: datetime
+    created_at: dt.datetime
+    updated_at: dt.datetime
 
 
 @dataclass(frozen=True)

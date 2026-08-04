@@ -29,16 +29,15 @@ from .middlewares.metrics import PrometheusMiddleware, metrics_router
 logger = structlog.get_logger(__name__)
 
 
-async def unknown_exception_handler(_request: Request, err: Exception) -> ORJSONResponse:
+def unknown_exception_handler(_request: Request, err: Exception) -> ORJSONResponse:
     logger.error("Handle error", exc_info=err, extra={"error": err})
-    logger.exception("Unknown error occurred", exc_info=err, extra={"error": err})
     return ORJSONResponse(
         {"detail": "Internal server error"},
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
     )
 
 
-async def auth_error_handler(_request: Request, err: AuthError) -> ORJSONResponse:
+def auth_error_handler(_request: Request, err: AuthError) -> ORJSONResponse:
     status_code = status.HTTP_400_BAD_REQUEST
     if isinstance(err, InvalidCredentials):
         status_code = status.HTTP_401_UNAUTHORIZED

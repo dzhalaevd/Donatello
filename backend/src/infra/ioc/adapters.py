@@ -56,7 +56,10 @@ class SqlalchemyProvider(Provider):
     @provide(scope=Scope.REQUEST, provides=AsyncSession)
     async def provide_session(self, sessionmaker: async_sessionmaker[AsyncSession]) -> AsyncIterable[AsyncSession]:
         async with sessionmaker() as session:
-            yield session
+            try:
+                yield session  # noqa: ASYNC119 - Dishka consumes async generator providers.
+            finally:
+                await session.close()
 
     @provide(scope=Scope.REQUEST)
     def provide_uow(self, session: AsyncSession) -> UnitOfWork:

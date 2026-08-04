@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+import datetime as dt
 from uuid import UUID, uuid4
 
 from sqlalchemy import Column, DateTime, ForeignKey, MetaData, String, Table, UniqueConstraint, delete, insert, select
@@ -166,7 +166,7 @@ class AuthRepository:
         )
 
 
-def _build_identity(user_id: UUID, identity: VerifiedIdentity, now: datetime) -> AuthIdentity:
+def _build_identity(user_id: UUID, identity: VerifiedIdentity, now: dt.datetime) -> AuthIdentity:
     return AuthIdentity(
         id=uuid4(),
         user_id=user_id,
@@ -201,5 +201,5 @@ def _identity_from_row(row: RowMapping) -> AuthIdentity:
     )
 
 
-def _utc_now() -> datetime:
-    return datetime.now(UTC)
+def _utc_now() -> dt.datetime:
+    return dt.datetime.now(dt.UTC)
