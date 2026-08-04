@@ -1,0 +1,11 @@
+name: DatingBot CodeQL configuration
+
+queries:
+  - uses: security-extended
+
+paths-ignore:
+  - "**/.venv/**"
+  - "**/__pycache__/**"
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "monitoring/grafana/dashboards/**"
