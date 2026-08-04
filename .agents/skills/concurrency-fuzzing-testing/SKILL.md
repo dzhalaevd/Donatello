@@ -1,5 +1,5 @@
 ---
-name: concurrency_fuzzing_testing
+name: concurrency-fuzzing-testing
 description: Use as the lead skill when Python tests must expose scheduler/interleaving bugs in asyncio, threading, queues, workers, databases, caches, or mixed-concurrency code
 ---
 
@@ -217,11 +217,14 @@ async def test_operation_concurrent_fuzz() -> None:
                 timeout=1.0,
             )
 
-        assert_invariants_hold(), {
-            "seed": seed,
-            "iteration": iteration,
-            "trace": trace,
-        }
+        (
+            assert_invariants_hold(),
+            {
+                "seed": seed,
+                "iteration": iteration,
+                "trace": trace,
+            },
+        )
 ```
 
 Use fewer iterations in PR CI and more in nightly CI.

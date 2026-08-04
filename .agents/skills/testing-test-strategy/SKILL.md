@@ -21,14 +21,14 @@ Use this skill when the user asks to:
 
 Choose the lead skill by the primary risk, then add supporting skills for tooling or workflow.
 
-| User need | Lead skill | Supporting skills |
-| --- | --- | --- |
-| Decide what tests are needed | `testing-test-strategy` | `unit-testing`, `integration-testing`, `concurrency_fuzzing_testing`, `testing-pytest` |
-| Isolated Python logic, validation, transformations, simple async function awaited once | `unit-testing` | `testing-pytest` |
-| Real database, repository, transaction, migration, API flow, or multiple components | `integration-testing` | `testing-pytest` |
-| Multiple workers/tasks/threads, `asyncio.Queue`, shared state, locks, cancellation, backpressure, lost updates, order-dependent failures | `concurrency_fuzzing_testing` | `integration-testing`, `testing-pytest` |
-| Runnable pytest syntax, fixtures, parametrization, mocks, `pytest-httpx`, `dirty-equals` | the relevant level skill | `testing-pytest` |
-| Production change should be test-first | the relevant level skill | `test-driven-development`, `testing-pytest` |
+| User need                                                                                                                                | Lead skill                    | Supporting skills                                                                      |
+|------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|----------------------------------------------------------------------------------------|
+| Decide what tests are needed                                                                                                             | `testing-test-strategy`       | `unit-testing`, `integration-testing`, `concurrency_fuzzing_testing`, `testing-pytest` |
+| Isolated Python logic, validation, transformations, simple async function awaited once                                                   | `unit-testing`                | `testing-pytest`                                                                       |
+| Real database, repository, transaction, migration, API flow, or multiple components                                                      | `integration-testing`         | `testing-pytest`                                                                       |
+| Multiple workers/tasks/threads, `asyncio.Queue`, shared state, locks, cancellation, backpressure, lost updates, order-dependent failures | `concurrency_fuzzing_testing` | `integration-testing`, `testing-pytest`                                                |
+| Runnable pytest syntax, fixtures, parametrization, mocks, `pytest-httpx`, `dirty-equals`                                                 | the relevant level skill      | `testing-pytest`                                                                       |
+| Production change should be test-first                                                                                                   | the relevant level skill      | `test-driven-development`, `testing-pytest`                                            |
 
 Async alone is not a concurrency-fuzzing signal. An async function with controlled dependencies and no competing task is
 usually a unit test. Concurrency fuzzing becomes the lead when correctness depends on interleaving between concurrent

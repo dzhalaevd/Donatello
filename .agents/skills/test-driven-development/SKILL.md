@@ -14,7 +14,7 @@ TDD is a workflow overlay, not a replacement for choosing the right test level. 
 
 - `unit-testing` for isolated behavior;
 - `integration-testing` for database/API/multi-component behavior;
-- `concurrency_fuzzing_testing` for race-condition or interleaving bugs;
+- `concurrency-fuzzing-testing` for race-condition or interleaving bugs;
 - `testing-pytest` for pytest implementation details.
 
 ## When to Use

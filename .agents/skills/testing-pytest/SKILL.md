@@ -74,15 +74,13 @@ Name tests in domain language.
 Good:
 
 ```python
-def test_create_user_fails_when_email_already_exists() -> None:
-    ...
+def test_create_user_fails_when_email_already_exists() -> None: ...
 ```
 
 Bad:
 
 ```python
-def test_create_user_409_case_2() -> None:
-    ...
+def test_create_user_409_case_2() -> None: ...
 ```
 
 Prefer clarity over a rigid naming scheme.
@@ -364,8 +362,7 @@ import allure
 
 
 @allure.title("User cannot register with an already used email")
-def test_create_user_fails_when_email_already_exists(client) -> None:
-    ...
+def test_create_user_fails_when_email_already_exists(client) -> None: ...
 ```
 
 Do not duplicate obvious descriptions for every small unit test.
