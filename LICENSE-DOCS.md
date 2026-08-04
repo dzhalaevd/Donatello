@@ -1,6 +1,6 @@
 # Documentation License
 
-Copyright 2021–2026 Make Dating Great Again contributors.
+Copyright 2021–2026 David Dzhalaev.
 
 Unless otherwise noted, the repository-authored Markdown documentation in this
 repository is licensed under the [Creative Commons Attribution 4.0 International
