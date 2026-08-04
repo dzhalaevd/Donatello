@@ -1,0 +1,34 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - prometheus:9090
+
+  - job_name: otel-collector
+    static_configs:
+      - targets:
+          - otel-collector:9464
+
+  - job_name: backend
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - backend:8000
+
+  - job_name: tgbot
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - tgbot:8000
+
+  - job_name: cadvisor
+    static_configs:
+      - targets:
+          - cadvisor:8080

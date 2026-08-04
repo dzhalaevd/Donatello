@@ -1,0 +1,206 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    name: Detect changed areas
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      tgbot: ${{ steps.filter.outputs.tgbot }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Detect changed areas
+        id: filter
+        uses: dorny/paths-filter@v4
+        with:
+          filters: |
+            backend:
+              - 'backend/**'
+              - 'Makefile'
+              - 'ruff.toml'
+              - '.flake8'
+              - '.github/workflows/ci.yml'
+            tgbot:
+              - 'tgbot/**'
+              - 'Makefile'
+              - 'ruff.toml'
+              - '.flake8'
+              - 'mypy.ini'
+              - '.github/workflows/ci.yml'
+            frontend:
+              - 'front/**'
+              - 'Makefile'
+              - '.github/workflows/ci.yml'
+
+  backend:
+    name: Backend
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: |
+            backend/uv.lock
+            backend/pyproject.toml
+
+      - name: Install backend dependencies
+        run: make install-backend
+
+      - name: Verify backend
+        run: make verify-backend
+
+  tgbot:
+    name: Telegram bot
+    needs: changes
+    if: needs.changes.outputs.tgbot == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: |
+            tgbot/uv.lock
+            tgbot/pyproject.toml
+
+      - name: Install Telegram bot dependencies
+        run: make install-tgbot
+
+      - name: Verify Telegram bot
+        run: make verify-tgbot
+
+  frontend:
+    name: Frontend
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+
+      - name: Install frontend dependencies
+        run: make install-front
+
+      - name: Verify frontend
+        run: make verify-front
+
+  pre-commit:
+    name: Pre-commit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: |
+            tgbot/uv.lock
+            tgbot/pyproject.toml
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+
+      - name: Install Telegram bot dependencies
+        run: make install-tgbot
+
+      - name: Install frontend dependencies
+        run: make install-front
+
+      - name: Run pre-commit
+        run: make verify-pre-commit
+
+  ci-success:
+    name: CI success
+    needs:
+      - changes
+      - backend
+      - tgbot
+      - frontend
+      - pre-commit
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check required jobs
+        env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
+          BACKEND_RESULT: ${{ needs.backend.result }}
+          TGBOT_RESULT: ${{ needs.tgbot.result }}
+          FRONTEND_RESULT: ${{ needs.frontend.result }}
+          PRE_COMMIT_RESULT: ${{ needs.pre-commit.result }}
+        run: |
+          if [[ "$CHANGES_RESULT" != "success" ]]; then
+            echo "Changed-area detection finished with: $CHANGES_RESULT"
+            exit 1
+          fi
+
+          if [[ "$PRE_COMMIT_RESULT" != "success" ]]; then
+            echo "Pre-commit finished with: $PRE_COMMIT_RESULT"
+            exit 1
+          fi
+
+          for result in "$BACKEND_RESULT" "$TGBOT_RESULT" "$FRONTEND_RESULT"; do
+            if [[ "$result" != "success" && "$result" != "skipped" ]]; then
+              echo "Application verification finished with: $result"
+              exit 1
+            fi
+          done

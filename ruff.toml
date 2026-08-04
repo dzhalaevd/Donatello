@@ -1,0 +1,145 @@
+preview = true
+fix = true
+output-prefer-rule-codes = true
+
+target-version = "py313"
+line-length = 120
+src = ["."]
+
+extend-exclude = [
+    "**/migrations/**",
+    "tests/**/__snapshots__/**",
+    "tests/fixtures/**",
+]
+
+
+[format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = false
+
+
+[lint]
+select = ["ALL"]
+
+ignore = [
+    # Конфликты с Ruff Formatter:
+    "COM812",
+    "E203",
+    "E302",
+    "ISC001",
+
+    # Docstrings:
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D203",
+    "D205",
+    "D213",
+    "D401",
+    "D404",
+    "D405",
+    "D418",
+
+    # Аннотации проверяются mypy:
+    "ANN",
+
+    # Архитектурные и стилевые решения проекта:
+    "A005",
+    "B024",
+    "ERA001",
+    "FBT001",
+    "FBT002",
+    "INP001",
+    "N811",
+    "N818",
+    "PLR09",
+    "PLR2004",
+    "PLR6301",
+    "S110",
+    "TRY003",
+
+    # Кириллица и Unicode:
+    "RUF001",
+    "RUF002",
+    "RUF003",
+
+    # Старый стиль кодов и комментариев Ruff:
+    "RUF067",
+    "RUF105",
+    "RUF106",
+    "RUF201",
+
+    "ISC003",
+    "CPY001"
+]
+
+external = ["WPS"]
+
+
+[lint.flake8-import-conventions]
+banned-from = ["ast", "datetime"]
+
+
+[lint.flake8-import-conventions.aliases]
+datetime = "dt"
+
+
+[lint.flake8-quotes]
+inline-quotes = "double"
+
+
+[lint.mccabe]
+max-complexity = 6
+
+
+[lint.pydocstyle]
+convention = "google"
+
+
+[lint.isort]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+no-lines-before = []
+combine-as-imports = true
+
+known-third-party = [
+    "fastapi",
+    "httpx",
+    "pydantic",
+    "redis",
+]
+
+
+[lint.per-file-ignores]
+"**/tests/**/*.py" = [
+    "S101",
+    "S105",
+    "S404",
+    "S603",
+    "S607",
+]
+
+"wemake_python_styleguide/compat/nodes.py" = [
+    "ICN003",
+    "PLC0414",
+]
+
+"wemake_python_styleguide/types.py" = [
+    "D102",
+]
+
+"wemake_python_styleguide/visitors/ast/*.py" = [
+    "N802",
+]

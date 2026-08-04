@@ -1,0 +1,64 @@
+{
+  "uid": "datingbot-tgbot",
+  "title": "Telegram Bot Overview",
+  "tags": ["datingbot", "tgbot"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Webhook Availability",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "up{job=\"tgbot\"}", "refId": "A"}],
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Updates per Minute",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (update_type, status) (rate(telegram_updates_total{job=\"tgbot\"}[5m]) * 60)", "legendFormat": "{{update_type}} {{status}}", "refId": "A"}],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4}
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Update Errors",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (update_type, status) (rate(telegram_update_errors_total{job=\"tgbot\"}[5m]))", "legendFormat": "{{update_type}} {{status}}", "refId": "A"}],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4}
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Handler p95 Latency",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "histogram_quantile(0.95, sum by (le, update_type) (rate(telegram_handler_duration_seconds_bucket{job=\"tgbot\"}[5m])))", "legendFormat": "{{update_type}}", "refId": "A"}],
+      "fieldConfig": {"defaults": {"unit": "s"}, "overrides": []},
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12}
+    },
+    {
+      "id": 5,
+      "type": "logs",
+      "title": "Recent Bot Errors",
+      "datasource": {"type": "loki", "uid": "loki"},
+      "targets": [{"expr": "{service=\"tgbot\",environment=\"dev\"} |= \"error\"", "refId": "A"}],
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 20}
+    },
+    {
+      "id": 6,
+      "type": "traces",
+      "title": "Recent Bot Traces",
+      "datasource": {"type": "tempo", "uid": "tempo"},
+      "targets": [{"query": "{ resource.service.name = \"tgbot\" }", "queryType": "traceql", "refId": "A"}],
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 29}
+    }
+  ]
+}

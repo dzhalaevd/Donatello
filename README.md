@@ -1,64 +1,115 @@
+<div align="center">
+
+# Make Dating Great Again
+
+**A dating product experiment focused on meaningful relationships, not endless engagement.**
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
+[![Stars][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
+</div>
 
-<!--suppress HtmlDeprecatedAttribute -->
-<h2 align="center">DatingBot</h2>
+---
 
-### :monocle_face: About
+| 🏗️ This project is currently under development and is **not ready for production use**. |
+|------------------------------------------------------------------------------------------|
 
-| 🏗️ The project has moved elsewhere, and currently available at [que.group](https://github.com/QueGroup) |
-|----------------------------------------------------------------------------------------------------------|
+## :mag: About
 
-Open-source Dating Telegram bot built on aiogram 2.x to facilitate the search for new connections. The bot incorporates
-a classic profile browsing system, along with filtering options and event organization capabilities. Users can create
-and join events, fostering community engagement. Additionally, the project is closely integrated with neural networks,
-enhancing its capabilities.
+Most dating applications optimize for engagement.
 
-### :alembic: Built With
+**Make Dating Great Again** explores a different approach:
 
-![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)\
-![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)\
-![AIOHTTP](https://img.shields.io/badge/aiohttp-%232C5bb4.svg?style=for-the-badge&logo=aiohttp&logoColor=white)\
-![Poetry](https://img.shields.io/badge/Poetry-%233B82F6.svg?style=for-the-badge&logo=poetry&logoColor=0B3D8D)\
-![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)\
-![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)\
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)\
-![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)
+- Reduce dating-app burnout
+- Encourage intentional interactions
+- Increase meaningful conversations
+- Support healthy offline outcomes
+- Minimize cognitive overload
+- Avoid addictive product mechanics
 
-### :hammer: Development
+Success is measured by helping people form genuine connections and eventually leave the app.
 
-Find the instructions for running the app locally in the [Development Guide](docs/DEVELOPMENT.md)
+## :alembic: Built With
 
-### :busts_in_silhouette: Contributing
+![Python][python-shield]
+![uv][uv-shield]
+![wps][wemake-shield]
+![FastAPI][fastapi-shield]
+![SQLAlchemy][sqlalchemy-shield]
+![Pytest][pytest-shield]
+![Telegram][telegram-shield]
+![React][react-shield]
+![TypeScript][typescript-shield]
+![Vite][vite-shield]
+![PostgreSQL][postgres-shield]
+![OpenTelemetry][otel-shield]
+![Grafana][grafana-shield]
+![Prometheus][prometheus-shield]
+![Docker][docker-shield]
 
-Find the instructions for contributing in the [Contributing Guide](CONTRIBUTING.md)
 
-### :page_facing_up: License
+## :rocket: Quickstart
 
-This project is licensed under the [Creative Commons Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0)](LICENSE)
+See:
 
-<br><br/>
+- [DEVELOPMENT.md](DEVELOPMENT.md) — local development setup
+- [README.md](README.md) — project overview
 
-<h3 align="center">Works on Open Source</h3>
+<div align="center">
+
+### Works on Open-Source
+
+If you find this project interesting, consider giving it a ⭐
 
 ![image](https://user-images.githubusercontent.com/72649244/173241368-c40bd408-8df8-450f-9ac7-530de1692e1c.png)
 
+</div>
 
-[contributors-shield]: https://img.shields.io/github/contributors/DavidRomanovizc/DatingBot.svg?style=for-the-badge
 
-[contributors-url]: https://github.com/DavidRomanovizc/DatingBot/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/dzhalaevd/Donatello.svg?style=for-the-badge
 
-[forks-shield]: https://img.shields.io/github/forks/DavidRomanovizc/DatingBot.svg?style=for-the-badge
+[contributors-url]: https://github.com/dzhalaevd/Donatello/graphs/contributors
 
-[forks-url]: https://github.com/DavidRomanovizc/DatingBot/network/members
+[forks-shield]: https://img.shields.io/github/forks/dzhalaevd/Donatello.svg?style=for-the-badge
 
-[stars-shield]: https://img.shields.io/github/stars/DavidRomanovizc/DatingBot.svg?style=for-the-badge
+[forks-url]: https://github.com/dzhalaevd/Donatello/network/members
 
-[stars-url]: https://github.com/DavidRomanovizc/DatingBot/stargazers
+[stars-shield]: https://img.shields.io/github/stars/dzhalaevd/Donatello.svg?style=for-the-badge
 
-[issues-shield]: https://img.shields.io/github/issues/DavidRomanovizc/DatingBot.svg?style=for-the-badge
+[stars-url]: https://github.com/dzhalaevd/Donatello/stargazers
 
-[issues-url]: https://github.com/DavidRomanovizc/DatingBot/issues
+[issues-shield]: https://img.shields.io/github/issues/dzhalaevd/Donatello.svg?style=for-the-badge
+
+[issues-url]: https://github.com/dzhalaevd/Donatello/issues
+
+[python-shield]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
+
+[uv-shield]: https://img.shields.io/badge/uv-%23DE5FE9.svg?style=for-the-badge&logo=uv&logoColor=white
+
+[fastapi-shield]: https://img.shields.io/badge/FastAPI-005571.svg?style=for-the-badge&logo=fastapi
+
+[sqlalchemy-shield]: https://img.shields.io/badge/sqlalchemy-%23D71F00.svg?style=for-the-badge&logo=sqlalchemy&logoColor=white
+
+[pytest-shield]: https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3
+
+[telegram-shield]: https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white
+
+[react-shield]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
+
+[typescript-shield]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+
+[vite-shield]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
+
+[postgres-shield]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
+
+[otel-shield]: https://img.shields.io/badge/OpenTelemetry-FFFFFF?style=for-the-badge&logo=opentelemetry&logoColor=black
+
+[grafana-shield]: https://img.shields.io/badge/grafana-%23F46800.svg?style=for-the-badge&logo=grafana&logoColor=white
+
+[prometheus-shield]: https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=white
+
+[docker-shield]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
+
+[wemake-shield]: https://img.shields.io/badge/style-wemake-%23000000.svg?style=for-the-badge&logo=python&logoColor=white

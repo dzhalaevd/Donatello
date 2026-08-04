@@ -1,0 +1,40 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = ""
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi==0.136.0",
+    "httpx==0.28.1",
+    "orjson==3.11.4",
+    "opentelemetry-distro>=0.60b0,<1.0",
+    "opentelemetry-exporter-otlp>=1.39.0,<2.0",
+    "opentelemetry-instrumentation-fastapi>=0.60b0,<1.0",
+    "opentelemetry-instrumentation-httpx>=0.60b0,<1.0",
+    "opentelemetry-instrumentation-logging>=0.60b0,<1.0",
+    "opentelemetry-instrumentation-psycopg>=0.60b0,<1.0",
+    "opentelemetry-instrumentation-sqlalchemy>=0.60b0,<1.0",
+    "prometheus-client>=0.21.1",
+    "pyjwt[crypto]==2.10.1",
+    "uvicorn[standard]==0.34.2",
+    "sqlalchemy==2.0.40",
+    "psycopg[binary]==3.2.7",
+    "pydantic-settings==2.9.1",
+    "python-multipart==0.0.20",
+    "structlog>=25.5.0",
+    "dishka>=1.10.1",
+    "alembic>=1.18.4",
+    "environs>=15.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==7.4.4",
+    "pytest-asyncio==0.23.3",
+    "pre-commit==3.6.0",
+    "wemake-python-styleguide>=1.7.1",
+    "ruff==0.16.1",
+]
+
+[tool.uv]
+package = false

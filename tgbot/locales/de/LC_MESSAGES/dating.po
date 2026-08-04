@@ -1,0 +1,1417 @@
+# German translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-08-28 14:39+0300\n"
+"PO-Revision-Date: 2023-08-24 00:07+0300\n"
+"Last-Translator: \n"
+"Language: de_ID\n"
+"Language-Team: id_ID <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: functions/dating/reaction_strategies.py:46
+#: functions/dating/reaction_strategies.py:171
+msgid "На данный момент у нас нет подходящих анкет для вас"
+msgstr "Wir haben derzeit keine geeigneten Profile für Sie"
+
+#: functions/dating/reaction_strategies.py:52
+msgid "У вас достигнут лимит на просмотры анкет"
+msgstr "Sie haben Ihr Limit an Profilansichten erreicht"
+
+#: functions/dating/reaction_strategies.py:61
+msgid "Кому-то понравилась твоя анкета"
+msgstr "Ihr Profil hat jemandem gefallen"
+
+#: functions/dating/reaction_strategies.py:103 handlers/users/view_event.py:51
+msgid ""
+"Рад был помочь, {fullname}!\n"
+"Надеюсь, ты нашел кого-то благодаря мне"
+msgstr ""
+"Es war mir eine Freude, {fullname} zu helfen!\n"
+"Ich hoffe, Sie haben jemanden dank mir gefunden"
+
+#: functions/dating/reaction_strategies.py:126
+msgid "Отлично! Надеюсь вы хорошо проведете время ;) Начинай общаться 👉"
+msgstr "Toll! Ich hoffe, du hast eine gute Zeit ;) Chatten beginnen 👉"
+
+#: functions/dating/reaction_strategies.py:187
+msgid "<u>Выберите причину жалобы:</u>"
+msgstr ""
+
+#: functions/dating/reaction_strategies.py:204
+msgid ""
+"Жалоба от пользователя: <code>[@{username}</code> | <code>{tg_id}</code>]"
+"\n"
+"\n"
+"На пользователя: <code>[{owner_id}]</code>\n"
+"Причина жалобы: <code>{reason}</code>\n"
+"Количество жалоб на пользователя: <code>{counter_of_report}</code>"
+msgstr ""
+
+#: functions/dating/send_form_func.py:25
+msgid ""
+"{}, {} лет, {} {verification}\n"
+"\n"
+msgstr ""
+"{}, {} Jahre, {} {verification}\n"
+"\n"
+
+#: functions/dating/send_form_func.py:28
+msgid "{commentary}"
+msgstr "{commentary}"
+
+#: functions/dating/send_form_func.py:36
+msgid "<b>Инстаграм</b> - <code>{instagram}</code>\n"
+msgstr "<b>instagram</b> - <code>{instagram}</code>\n"
+
+#: functions/dating/send_form_func.py:48
+msgid ""
+"{}\n"
+"\n"
+"{}"
+msgstr ""
+"{}\n"
+"\n"
+"{}"
+
+#: functions/dating/send_form_func.py:57
+msgid ""
+"{}\n"
+"\n"
+"<b>Инстаграм</b> - <code>{instagram}</code>\n"
+msgstr ""
+"{}\n"
+"\n"
+"<b>Instagram</b> - <code>{instagram}</code>\n"
+
+#: functions/event/extra_features.py:86
+msgid "На данный момент у нас нет подходящих мероприятий для вас"
+msgstr "Derzeit haben wir keine passenden Veranstaltungen für Sie"
+
+#: functions/event/templates_messages.py:17
+msgid ""
+"<b>{}</b> \n"
+"Когда: {} \n"
+"Где: {} \n"
+"\n"
+"{}"
+msgstr ""
+"<b>{}</b> \n"
+"Wann: {} \n"
+"Ort: {} \n"
+"\n"
+"{}"
+
+#: functions/main_app/app_scheduler.py:12
+msgid "Несколько {} из города {} хотят познакомиться с тобой прямо сейчас"
+msgstr "Mehrere {} aus der Stadt {} möchten Sie jetzt treffen"
+
+#: functions/main_app/auxiliary_tools.py:71
+msgid ""
+"{name}, {age} лет, {city}, {verification}\n"
+"\n"
+"{commentary}\n"
+"\n"
+"<u>Партнерка:</u>\n"
+"Количество приглашенных друзей: {reff}\n"
+"Реферальная ссылка:\n"
+" {link}"
+msgstr ""
+"{name}, {age} Jahre, {city}, {verification}\n"
+"\n"
+"{commentary}\n"
+"\n"
+"<u>Partner:</u>.\n"
+"Anzahl der eingeladenen Freunde: {reff}\n"
+"Empfehlungslink:\n"
+" {link}"
+
+#: functions/main_app/auxiliary_tools.py:96
+msgid ""
+"Фильтр по подбору партнеров:\n"
+"\n"
+"🚻 Необходимы пол партнера: {}\n"
+"🔞 Возрастной диапазон: {}-{} лет\n"
+"\n"
+"🏙️ Город партнера: {}"
+msgstr ""
+"Filter nach Partnerauswahl:\n"
+"\n"
+"🚻 Geschlecht des Partners erforderlich: {}\n"
+"🔞 Altersbereich: {}-{} Jahre alt\n"
+"\n"
+"🏙️ Partnerstadt: {}"
+
+#: functions/main_app/auxiliary_tools.py:121
+msgid ""
+"Приветствую вас, {fullname}!!\n"
+"\n"
+"{heart} <b> QueDateBot </b> - платформа для поиска новых знакомств.\n"
+"\n"
+"🪧 Новости о проекте вы можете прочитать в нашем канале - "
+"https://t.me/QueDateGroup \n"
+"\n"
+"<b>🤝 Сотрудничество: </b>\n"
+"Если у вас есть предложение о сотрудничестве, пишите агенту поддержки - "
+"@{supports}\n"
+"\n"
+msgstr ""
+"Grüße, {fullname}!!!\n"
+"\n"
+"{heart} <b> QueDateBot </b> ist eine Plattform zum Finden neuer "
+"Partnerschaften.\n"
+"\n"
+"🪧 Sie können Neuigkeiten über das Projekt in unserem Kanal lesen - "
+"https://t.me/QueDateGroup \n"
+"\n"
+"<b>🤝 Zusammenarbeit: </b>\n"
+"Wenn Sie einen Vorschlag für eine Zusammenarbeit haben, schreiben Sie an "
+"den Support-Agenten - @{supports}\n"
+"\n"
+
+#: functions/main_app/auxiliary_tools.py:168
+msgid ""
+"По вашей ссылке зарегистрировался пользователь {}!\n"
+"Вы получаете дополнительных 15 ❤️"
+msgstr ""
+"Ihr Link wurde von einem Benutzer {} verfolgt!\n"
+"Sie erhalten 15 zusätzliche ❤️"
+
+#: functions/main_app/auxiliary_tools.py:194
+msgid ""
+"Регистрация успешно завершена! \n"
+"\n"
+" {}, {} лет, {}\n"
+"\n"
+"<b>О себе</b> - {}"
+msgstr ""
+"Registrierung erfolgreich abgeschlossen! \n"
+"\n"
+" {}, {} Jahre, {}\n"
+"\n"
+"<b>Über mich</b> {}"
+
+#: functions/main_app/auxiliary_tools.py:215
+#: functions/main_app/auxiliary_tools.py:281
+msgid "Фото принято!"
+msgstr "Foto akzeptiert!"
+
+#: functions/main_app/auxiliary_tools.py:219
+#: functions/main_app/auxiliary_tools.py:254
+#: functions/main_app/auxiliary_tools.py:290
+msgid ""
+"Произошла ошибка! Попробуйте еще раз либо отправьте другую фотографию. \n"
+"Если ошибка осталась, напишите агенту поддержки."
+msgstr ""
+"Es ist ein Fehler aufgetreten! Bitte versuchen Sie es erneut oder senden "
+"Sie ein anderes Foto.\n"
+"Wenn der Fehler weiterhin besteht, schreiben Sie bitte unserem Support-"
+"Agenten."
+
+#: functions/main_app/auxiliary_tools.py:242
+msgid ""
+"Во время проверки вашего фото мы обнаружили подозрительный контент!\n"
+"Поэтому мы чуть-чуть подкорректировали вашу фотографию"
+msgstr ""
+"Während der Überprüfung Ihres Fotos haben wir verdächtige Inhalte "
+"festgestellt!\n"
+"Deshalb haben wir Ihr Foto ein wenig angepasst"
+
+#: functions/main_app/auxiliary_tools.py:262
+#, fuzzy
+msgid ""
+"<u>Фото принято!</u>\n"
+"Выберите, что вы хотите изменить: "
+msgstr "Wählen Sie aus, was Sie ändern möchten: "
+
+#: functions/main_app/auxiliary_tools.py:285
+msgid "Выберите, что вы хотите изменить: "
+msgstr "Wählen Sie aus, was Sie ändern möchten: "
+
+#: functions/main_app/auxiliary_tools.py:336
+msgid ""
+"Руководство по боту: \n"
+"<b>Страница №{}</b>"
+msgstr ""
+"Bot-Anleitung:\n"
+"<b>Seite Nr. {}</b>"
+
+#: functions/main_app/auxiliary_tools.py:352
+msgid ""
+"Вы попали в раздел <b>Информации</b> бота, здесь вы можете посмотреть: "
+"статистику,изменить язык, а также посмотреть наш брендбук.\n"
+"\n"
+"🌐 Дней работаем: <b>{}</b>\n"
+"👤 Всего пользователей: <b>{}</b>\n"
+msgstr ""
+"Sie befinden sich im Abschnitt <b>Informationen</b> des Bots. Hier können"
+" Sie folgendes anzeigen: Statistiken, Sprache ändern und unseren "
+"Markenleitfaden einsehen.\n"
+"\n"
+"🌐 Tage aktiv: <b>{}</b>\n"
+"👤 Gesamtanzahl Benutzer: <b>{}</b>\n"
+
+#: functions/main_app/determin_location.py:32
+msgid ""
+"Я нашел такой адрес:\n"
+"<b>{city}</b>\n"
+"Если все правильно, то подтвердите"
+msgstr ""
+"Ich habe diese Adresse gefunden:\n"
+"<b>{city}</b>\n"
+"Wenn alles korrekt ist, bestätigen Sie"
+
+#: handlers/echo_handler.py:13
+msgid "Эхо без состояния."
+msgstr "Echo ohne Zustand."
+
+#: handlers/echo_handler.py:38
+msgid "Меню: "
+msgstr "Menü: "
+
+#: handlers/admins/monitoring.py:14
+msgid "Чтобы начать мониторинг нажмите на кнопку ниже"
+msgstr "Um die Überwachung zu starten, klicken Sie auf die Schaltfläche unten"
+
+#: handlers/admins/monitoring.py:32
+msgid "Анкета пользователя была заблокирована"
+msgstr "Das Profil des Benutzers wurde blockiert"
+
+#: handlers/admins/advert/advertisement.py:21
+msgid ""
+"<u><b>📧 Рассылка</b></u>\n"
+"Пришлите текст для рассылки либо фото с текстом для рассылки! Чтобы "
+"отредактировать, используйте встроенный редактор телеграма!\n"
+msgstr ""
+"<u><b>📧 Newsletter</b></u>\n"
+"Senden Sie einen Text zum Versenden oder ein Foto mit Text zum Versenden!"
+" Verwenden Sie zum Bearbeiten den eingebauten Telegramm-Editor!\n"
+
+#: handlers/admins/advert/mailing/create.py:34
+#: handlers/admins/advert/mailing/create.py:124
+#: handlers/admins/advert/mailing/create.py:267
+msgid "Начинаю рассылку!"
+msgstr "Beginne mit der Massenversand!"
+
+#: handlers/admins/advert/mailing/create.py:49
+#: handlers/admins/advert/mailing/create.py:137
+#: handlers/admins/advert/mailing/create.py:192
+#: handlers/admins/advert/mailing/create.py:281
+msgid ""
+"Сообщение не дошло в чат {chat} Причина: \n"
+"{err}"
+msgstr ""
+"Die Nachricht wurde nicht an den Chat {chat} gesendet. Grund: \n"
+"{err}"
+
+#: handlers/admins/advert/mailing/create.py:55
+#: handlers/admins/advert/mailing/create.py:143
+#: handlers/admins/advert/mailing/create.py:198
+#: handlers/admins/advert/mailing/create.py:287
+msgid "Рассылка проведена успешно! Ее получили: {count} чатов!\n"
+msgstr ""
+"Die Massenversand wurde erfolgreich durchgeführt! {count} Chats haben es "
+"erhalten!\n"
+
+#: handlers/admins/advert/mailing/create.py:61
+msgid "Пришлите мне название кнопки!"
+msgstr "Bitte senden Sie mir den Namen der Taste!"
+
+#: handlers/admins/advert/mailing/create.py:70
+msgid "Название кнопки принято! Теперь отправьте мне ссылку для этой кнопки!"
+msgstr ""
+"Der Name der Taste wurde akzeptiert! Bitte senden Sie mir jetzt den Link "
+"für diese Taste!"
+
+#: handlers/admins/advert/mailing/create.py:90
+#: handlers/admins/advert/mailing/create.py:232
+msgid ""
+"Вот так будет выглядеть сообщение: \n"
+"\n"
+"{text}\n"
+"\n"
+msgstr ""
+"So wird die Nachricht aussehen: \n"
+"\n"
+"{text}\n"
+"\n"
+
+#: handlers/admins/advert/mailing/create.py:97
+#: handlers/admins/advert/mailing/create.py:239
+msgid "Вы подтверждаете отправку?"
+msgstr "Möchten Sie den Versand bestätigen?"
+
+#: handlers/admins/advert/mailing/create.py:104
+#: handlers/admins/advert/mailing/create.py:246
+msgid ""
+"Произошла ошибка! Скорее всего, неправильно введена ссылка! Попробуйте "
+"еще раз."
+msgstr ""
+"Es ist ein Fehler aufgetreten! Möglicherweise wurde der Link falsch "
+"eingegeben! Versuchen Sie es erneut."
+
+#: handlers/admins/advert/mailing/create.py:157
+msgid ""
+"Вот сообщение: \n"
+"\n"
+"{text}\n"
+"\n"
+" Вы подтверждаете отправку? Или хотите что-то добавить?"
+msgstr ""
+"Hier ist die Nachricht: \n"
+"\n"
+"{text}\n"
+"\n"
+" Bestätigen Sie die Übermittlung? Oder möchten Sie etwas hinzufügen?"
+
+#: handlers/admins/settings/tech_works.py:26
+msgid "Чтобы включить/выключить технические работы, нажмите на кнопку ниже"
+msgstr ""
+"Um Wartungsarbeiten ein- oder auszuschalten, klicken Sie auf die "
+"Schaltfläche unten"
+
+#: handlers/admins/settings/tech_works.py:36
+msgid "Технические работы включены"
+msgstr "Wartungsarbeiten sind aktiviert"
+
+#: handlers/admins/settings/tech_works.py:44
+msgid "Технические работы выключены"
+msgstr "Wartungsarbeiten sind deaktiviert"
+
+#: handlers/groups/event_moderate.py:24
+msgid "Принято!"
+msgstr "Akzeptiert!"
+
+#: handlers/groups/event_moderate.py:33
+msgid "Ваше мероприятие прошло модерацию"
+msgstr "Ihre Veranstaltung wurde moderiert"
+
+#: handlers/groups/event_moderate.py:40
+msgid "Отклонено!"
+msgstr "Abgelehnt!"
+
+#: handlers/groups/event_moderate.py:44
+msgid "К сожалению ваше мероприятие не прошло модерацию"
+msgstr "Leider hat Ihre Veranstaltung die Moderation nicht bestanden"
+
+#: handlers/groups/start.py:12
+msgid ""
+"<b>Привет, я бот, проекта Que Group, для верификации анкет для "
+"знакомств</b>\n"
+"\n"
+msgstr ""
+"<b>Hallo, ich bin ein Bot des Que Group-Projekts zur Überprüfung von "
+"Profilen für Dating</b>\n"
+"\n"
+
+#: handlers/users/back.py:43
+msgid "Вы забанены!"
+msgstr "Sie sind gesperrt!"
+
+#: handlers/users/back.py:50
+msgid "Вы вернулись в меню фильтров"
+msgstr "Sie sind zurück im Filtermenü"
+
+#: handlers/users/brandbook_handler.py:23
+msgid ""
+"Руководство по боту: \n"
+"<b>Страница №1</b>"
+msgstr ""
+"Bot-Anleitung:\n"
+"<b>Seite Nr. 1</b>"
+
+#: handlers/users/buy_unban.py:17
+msgid ""
+"<b>💳 Сейчас вам нужно выбрать способ оплаты</b>\n"
+"\n"
+"├Стоимость разблокировки - <b>99₽</b>\n"
+"├Оплата обычно приходить в течение 1-3 минут\n"
+"├Если у вас нет Yoomoney или нет возможности\n"
+"├оплатить, напишите агенту поддержки"
+msgstr ""
+"<b>💳 Jetzt müssen Sie eine Zahlungsmethode auswählen</b>\n"
+"\n"
+"├Entsperrkosten - <b>99₽</b>\n"
+"├Die Zahlung erfolgt normalerweise innerhalb von 1-3 Minuten\n"
+"├Wenn Sie kein Yoomoney haben oder nicht in der Lage sind zu bezahlen,\n"
+"├schreiben Sie dem Support-Agenten"
+
+#: handlers/users/buy_unban.py:38
+msgid "После оплаты нажмите <b>🔄 Проверить оплату</b>"
+msgstr "Nach der Zahlung klicken Sie auf <b>🔄 Zahlung bestätigen</b>"
+
+#: handlers/users/buy_unban.py:57
+msgid "Поздравляем! Вы были разрабанены"
+msgstr "Glückwunsch! Du wurdest entfreundet"
+
+#: handlers/users/buy_unban.py:65
+msgid ""
+"Оплата не прошла! Подождите минут 10, а затем еще раз попробуйте нажать "
+"кнопку ниже"
+msgstr ""
+"Zahlung fehlgeschlagen! Warten Sie etwa 10 Minuten und versuchen Sie es "
+"dann noch einmal mit der Schaltfläche unten"
+
+#: handlers/users/change_datas.py:35
+msgid "<u>Ваши данные: </u>\n"
+msgstr "<u>Ihre Angaben: </u>.\n"
+
+#: handlers/users/change_datas.py:40
+msgid "Введите новое имя"
+msgstr "Geben Sie einen neuen Namen ein"
+
+#: handlers/users/change_datas.py:53
+#, fuzzy
+msgid ""
+"Ваше новое имя: <b>{censored}</b>\n"
+"Выберите, что вы хотите изменить: "
+msgstr ""
+"Daten erfolgreich geändert.\n"
+"Wählen Sie aus, was Sie ändern möchten: "
+
+#: handlers/users/change_datas.py:63
+msgid ""
+"Произошла неизвестная ошибка. Попробуйте ещё раз\n"
+"Возможно, Ваше сообщение слишком большое"
+msgstr ""
+"Es ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut\n"
+"Ihre Nachricht ist möglicherweise zu groß"
+
+#: handlers/users/change_datas.py:76
+msgid "Введите новый возраст"
+msgstr "Neues Alter eingeben"
+
+#: handlers/users/change_datas.py:90
+#, fuzzy
+msgid ""
+"Ваш новый возраст: <b>{messages}</b>\n"
+"Выберите, что вы хотите изменить: "
+msgstr "Dein neues Alter: <b>{messages}</b>"
+
+#: handlers/users/change_datas.py:99 handlers/users/registration.py:163
+msgid "Вы ввели недопустимое число, попробуйте еще раз"
+msgstr "Sie haben eine ungültige Zahl eingegeben. Bitte versuchen Sie es erneut"
+
+#: handlers/users/change_datas.py:104
+msgid "Вы ввели не число, попробуйте еще раз"
+msgstr "Sie haben eine ungültige Zahl eingegeben. Bitte versuchen Sie es erneut"
+
+#: handlers/users/change_datas.py:112
+msgid "Введите новый город"
+msgstr "Geben Sie eine neue Stadt ein"
+
+#: handlers/users/change_datas.py:124
+msgid "Мы не смогли найти город {city}. Попробуйте ещё раз"
+msgstr "Wir konnten die Stadt {city} nicht finden. Erneut versuchen"
+
+#: handlers/users/change_datas.py:134
+msgid ""
+"Данные успешно изменены.\n"
+"Выберите, что вы хотите изменить: "
+msgstr ""
+"Daten erfolgreich geändert.\n"
+"Wählen Sie aus, was Sie ändern möchten: "
+
+#: handlers/users/change_datas.py:143 handlers/users/registration.py:63
+msgid "👱🏻‍♂️ Мужской"
+msgstr "👱🏻‍♂️ Männlich"
+
+#: handlers/users/change_datas.py:143 handlers/users/registration.py:63
+msgid "👱🏻‍♀️ Женский"
+msgstr "👱🏻‍♀️ Weiblich"
+
+#: handlers/users/change_datas.py:145
+msgid "Выберите новый пол: "
+msgstr "Wählen Sie ein neues Geschlecht: "
+
+#: handlers/users/change_datas.py:155
+#, fuzzy
+msgid ""
+"Ваш новый пол: <b>{}</b>\n"
+"Выберите, что вы хотите изменить: "
+msgstr "Wählen Sie aus, was Sie ändern möchten: "
+
+#: handlers/users/change_datas.py:167
+msgid "Отправьте мне новую фотографию"
+msgstr "Schicken Sie mir ein neues Foto"
+
+#: handlers/users/change_datas.py:191 handlers/users/registration.py:244
+msgid "Произошла ошибка, проверьте настройки конфиденциальности"
+msgstr ""
+"Es ist ein Fehler aufgetreten. Überprüfen Sie Ihre "
+"Datenschutzeinstellungen"
+
+#: handlers/users/change_datas.py:232
+#, fuzzy
+msgid "Отправьте сообщение о себе"
+msgstr "Senden Sie mir eine Sprachnachricht"
+
+#: handlers/users/change_datas.py:247
+#, fuzzy
+msgid ""
+"Комментарий принят!\n"
+"Выберите, что вы хотите изменить: "
+msgstr "Kommentar angenommen! Wählen Sie, wen Sie suchen möchten: "
+
+#: handlers/users/change_datas.py:254
+msgid ""
+"Произошла ошибка! Попробуйте еще раз изменить описание. Возможно, Ваше "
+"сообщение слишком большое\n"
+"Если ошибка осталась, напишите в поддержку."
+msgstr ""
+"Es ist ein Fehler aufgetreten! Versuchen Sie, die Beschreibung erneut zu "
+"ändern. Ihre Nachricht ist möglicherweise zu groß.\n"
+"Wenn der Fehler weiterhin besteht, wenden Sie sich bitte an den Support."
+
+#: handlers/users/change_datas.py:267
+msgid ""
+"Напишите имя своего аккаунта\n"
+"\n"
+"Примеры:\n"
+"<code>@unknown</code>\n"
+"<code>https://www.instagram.com/unknown</code>"
+msgstr ""
+"Schreiben Sie Ihren Kontonamen\n"
+"\n"
+"Beispiele:\n"
+"<code>@unknown</code>\n"
+"<code>https://www.instagram.com/unknown</code>"
+
+#: handlers/users/change_datas.py:289
+msgid "Ваш аккаунт успешно добавлен"
+msgstr "Ihr Konto wurde erfolgreich hinzugefügt"
+
+#: handlers/users/change_datas.py:293 handlers/users/verification.py:45
+msgid "Вы были возвращены в меню"
+msgstr "Sie wurden zum Menü zurückgeführt"
+
+#: handlers/users/change_datas.py:297
+msgid ""
+"Вы ввели неправильную ссылку или имя аккаунта.\n"
+"\n"
+"Примеры:\n"
+"<code>@unknown</code>\n"
+"<code>https://www.instagram.com/unknown</code>"
+msgstr ""
+"Sie haben einen falschen Link oder einen falschen Benutzernamen "
+"eingegeben.\n"
+"\n"
+"Beispiele:\n"
+"<code>@unknown</code>\n"
+"<code>https://www.instagram.com/unknown</code>"
+
+#: handlers/users/change_datas.py:304
+msgid "Возникла ошибка. Попробуйте еще раз"
+msgstr "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut"
+
+#: handlers/users/change_event_datas.py:16
+msgid "Вы перешли в меню изменения данных мероприятия"
+msgstr "Sie haben das Menü zur Änderung der Veranstaltungsdaten aufgerufen"
+
+#: handlers/users/change_event_datas.py:23
+msgid "Напишите новое название вашего мероприятия"
+msgstr "Geben Sie den neuen Namen Ihrer Veranstaltung ein"
+
+#: handlers/users/change_event_datas.py:35
+#: handlers/users/change_event_datas.py:53
+msgid "Данные изменены"
+msgstr "Daten wurden geändert"
+
+#: handlers/users/change_event_datas.py:41
+msgid "Напишите новое описание вашего мероприятия"
+msgstr "Geben Sie eine neue Beschreibung für Ihre Veranstaltung ein"
+
+#: handlers/users/event_handler.py:31
+msgid "Вы перешли в меню афиш"
+msgstr "Sie haben das Menü für Plakate aufgerufen"
+
+#: handlers/users/event_handler.py:48
+msgid "Введите название мероприятие"
+msgstr "Geben Sie den Namen der Veranstaltung ein"
+
+#: handlers/users/event_handler.py:55
+msgid ""
+"Вы уже создали мероприятие, которое проходит модерацию. Дождитесь "
+"проверки, пожалуйста"
+msgstr ""
+"Sie haben bereits eine Veranstaltung erstellt, die gerade moderiert wird."
+" Bitte warten Sie auf die Überprüfung"
+
+#: handlers/users/event_handler.py:63
+msgid ""
+"Прочитайте сообщение и не нажимайте на кнопку, пока ваше мероприятие не "
+"пройдет модерацию"
+msgstr ""
+"Lesen Sie die Nachricht und drücken Sie nicht auf die Schaltfläche, bis "
+"Ihre Veranstaltung moderiert wurde"
+
+#: handlers/users/event_handler.py:78
+msgid "Пожалуйста, выберите дату: "
+msgstr "🕕 ein Datum festlegen: "
+
+#: handlers/users/event_handler.py:83
+msgid ""
+"Длинна вашего сообщение превышает допустимую.\n"
+"Попробуйте ещё раз"
+msgstr ""
+"Die Länge Ihrer Nachricht überschreitet die zulässige Länge.\n"
+"Erneut versuchen"
+
+#: handlers/users/event_handler.py:99
+msgid "Вы не можете проводить мероприятие в прошлом"
+msgstr "Sie können keine Veranstaltung in der Vergangenheit abhalten"
+
+#: handlers/users/event_handler.py:105
+msgid "Теперь напишите место проведения"
+msgstr "Geben Sie jetzt den Veranstaltungsort ein"
+
+#: handlers/users/event_handler.py:126
+msgid "Вы ввели слишком длинное название городаПопробуйте ещё раз."
+msgstr "Sie haben einen zu langen Städtenamen eingegebenVersuchen Sie es erneut."
+
+#: handlers/users/event_handler.py:132
+msgid ""
+"Произошла неизвестная ошибка! Попробуйте еще раз.\n"
+"Вероятнее всего вы ввели город неправильно"
+msgstr ""
+"Ein unbekannter Fehler ist aufgetreten! Versuchen Sie es erneut.\n"
+"Sie haben wahrscheinlich die Stadt falsch eingegeben"
+
+#: handlers/users/event_handler.py:142
+msgid "Хорошо, теперь напишите короткое или длинное описание вашего мероприятия"
+msgstr ""
+"Ok, schreiben Sie jetzt eine kurze oder lange Beschreibung Ihrer "
+"Veranstaltung"
+
+#: handlers/users/event_handler.py:158
+msgid "И напоследок, пришлите постер вашего мероприятия"
+msgstr "Und zuletzt senden Sie das Plakat Ihrer Veranstaltung"
+
+#: handlers/users/event_handler.py:164
+msgid "Ваше сообщение слишком длинное.Попробуйте написать короче"
+msgstr "Ihre Nachricht ist zu lang, versuchen Sie, sie kürzer zu schreiben"
+
+#: handlers/users/event_handler.py:178
+msgid "Фото принято"
+msgstr "Foto angenommen"
+
+#: handlers/users/event_handler.py:200
+msgid "Ваше мероприятие отправлено на модерацию"
+msgstr "Ihre Veranstaltung wurde zur Moderation gesendet"
+
+#: handlers/users/event_list.py:23
+msgid "На данный момент вы никуда не записались"
+msgstr "Sie sind derzeit nirgendwo eingeschrieben"
+
+#: handlers/users/filters.py:23 handlers/users/filters.py:29
+msgid "Вы перешли в раздел с фильтрами"
+msgstr "Sie haben den Abschnitt mit Filtern aufgerufen"
+
+#: handlers/users/filters.py:41
+msgid "Напишите минимальный возраст"
+msgstr "Geben Sie das Mindestalter ein"
+
+#: handlers/users/filters.py:53
+msgid "Теперь введите максимальный возраст"
+msgstr "Geben Sie nun das Höchstalter ein"
+
+#: handlers/users/filters.py:73 handlers/users/registration.py:97
+msgid "👱🏻‍♂️ Парня"
+msgstr "👱🏻‍♂️ Kerl"
+
+#: handlers/users/filters.py:73 handlers/users/registration.py:97
+msgid "👱🏻‍♀️ Девушку"
+msgstr "👱🏻‍♀️ Ein Mädchen"
+
+#: handlers/users/filters.py:76
+msgid "Выберите, кого вы хотите найти:"
+msgstr "Wählen Sie, wen Sie suchen möchten:"
+
+#: handlers/users/filters.py:84 handlers/users/filters.py:111
+msgid "Данные сохранены"
+msgstr "Daten wurden gespeichert"
+
+#: handlers/users/filters.py:92
+msgid "Напишите город вашего будущего партнера"
+msgstr "Schreiben Sie die Stadt Ihres zukünftigen Partners"
+
+#: handlers/users/filters.py:103 handlers/users/filters.py:144
+msgid "Произошла ошибка, попробуйте еще раз"
+msgstr "Es ist ein Fehler aufgetreten, bitte versuchen Sie es erneut"
+
+#: handlers/users/filters.py:124
+msgid "Вы перешли в меню настроек фильтров для мероприятий"
+msgstr ""
+"Sie haben das Menü für die Filtereinstellungen für Veranstaltungen "
+"geöffnet"
+
+#: handlers/users/filters.py:132
+msgid "Напишите город, в котором бы хотели сходить куда-нибудь"
+msgstr "Schreiben Sie die Stadt, in der Sie gerne etwas unternehmen möchten"
+
+#: handlers/users/registration.py:42
+msgid "Пройдите опрос, чтобы зарегистрироваться"
+msgstr "Beantworten Sie die Fragen, um sich zu registrieren"
+
+#: handlers/users/registration.py:52
+msgid ""
+"Вы уже зарегистрированы, если вам нужно изменить анкету, то нажмите на "
+"кнопку ниже"
+msgstr ""
+"Sie sind bereits registriert. Wenn Sie Ihr Profil ändern möchten, klicken"
+" Sie auf die folgende Schaltfläche"
+
+#: handlers/users/registration.py:66
+msgid "Выберите пол"
+msgstr "Wählen Sie Ihr Geschlecht"
+
+#: handlers/users/registration.py:88
+msgid "Теперь расскажите о себе:\n"
+msgstr "Jetzt erzählen Sie mir etwas über sich selbst:\n"
+
+#: handlers/users/registration.py:105
+msgid "Комментарий принят! Выберите, кого вы хотите найти: "
+msgstr "Kommentar angenommen! Wählen Sie, wen Sie suchen möchten: "
+
+#: handlers/users/registration.py:111
+msgid ""
+"Произошла неизвестная ошибка! Попробуйте изменить комментарий позже в "
+"разделе \"Меню\"\n"
+"\n"
+"Выберите, кого вы хотите найти: "
+msgstr ""
+"Es ist ein unbekannter Fehler aufgetreten! Versuchen Sie, Ihren Kommentar"
+" später im Abschnitt Menü zu ändern\n"
+"\n"
+"Wählen Sie aus, wen Sie suchen möchten: "
+
+#: handlers/users/registration.py:125
+msgid "Отлично! Теперь напишите мне ваше имя, которое будут все видеть в анкете"
+msgstr ""
+"Super! Schreiben Sie mir jetzt Ihren Namen, den alle in Ihrem Profil "
+"sehen werden"
+
+#: handlers/users/registration.py:145
+msgid "Введите сколько вам лет:"
+msgstr "Geben Sie an, wie alt Sie sind:"
+
+#: handlers/users/registration.py:170
+msgid "Вы ввели не число"
+msgstr "Sie haben keine Zahl eingegeben"
+
+#: handlers/users/registration.py:175
+msgid "Нажмите на кнопку ниже, чтобы определить ваш местоположение!"
+msgstr "Klicken Sie auf die Schaltfläche unten, um Ihren Standort zu finden!"
+
+#: handlers/users/registration.py:188
+msgid "Мы не смогли найти такой город, попробуйте еще раз"
+msgstr "Wir konnten eine solche Stadt nicht finden, versuchen Sie es erneut"
+
+#: handlers/users/registration.py:211 handlers/users/registration.py:224
+msgid ""
+"И напоследок, Пришлите мне вашу фотографию (отправлять надо сжатое "
+"изображение, а не как документ)"
+msgstr ""
+"Und schließlich: Schicken Sie mir ein Foto von sich (als komprimiertes "
+"Bild, nicht als Dokument)"
+
+#: handlers/users/sponsor.py:10
+msgid ""
+"Наш проект работает на <b>Open Source</b> и мы будем рады,если вы нам "
+"поможете развивать проект.\n"
+"\n"
+"С помощью кнопки <b>💰 Донат</b> вы можете отправить своё пожертвование"
+msgstr ""
+"Unser Projekt basiert auf <b>Open Source</b> und wir wären dankbar, wenn "
+"Sie uns helfen, das Projekt weiterzuentwickeln.\n"
+"\n"
+"Mit der Schaltfläche <b>💰 Spenden</b> können Sie Ihre Spende senden"
+
+#: handlers/users/start_handler.py:27
+msgid "Вам необходимо зарегистрировать агента(ов) тех поддержки"
+msgstr "Sie müssen Ihre(n) Support-Agent(en) registrieren"
+
+#: handlers/users/start_handler.py:36
+msgid "Вас нет в базе данной"
+msgstr "Sie sind nicht in der Datenbank"
+
+#: handlers/users/start_handler.py:42 handlers/users/start_handler.py:47
+msgid "Выберите язык"
+msgstr "Wählen Sie eine Sprache aus"
+
+#: handlers/users/start_handler.py:57
+msgid "Язык был успешно изменен. Введите команду /start"
+msgstr "Die Sprache wurde erfolgreich geändert. Geben Sie den Befehl /start ein"
+
+#: handlers/users/start_handler.py:61
+msgid "Произошла какая-то ошибка. Введите команду /start и попробуйте еще раз"
+msgstr ""
+"Es ist eine Art Fehler aufgetreten. Geben Sie den Befehl /start ein und "
+"versuchen Sie es erneut"
+
+#: handlers/users/support_handler.py:20
+msgid "Хотите связаться с тех поддержкой? Нажмите на кнопку ниже!"
+msgstr ""
+"Möchten Sie den technischen Support kontaktieren? Klicken Sie auf die "
+"Schaltfläche unten!"
+
+#: handlers/users/support_handler.py:25 handlers/users/support_handler.py:52
+msgid "К сожалению, сейчас нет свободных операторов. Попробуйте позже."
+msgstr ""
+"Leider sind im Moment keine freien Operator verfügbar. Bitte versuchen "
+"Sie es später erneut."
+
+#: handlers/users/support_handler.py:41
+msgid "Вы обратились в техническую поддержку. Ждем ответа от оператора!"
+msgstr ""
+"Sie haben sich an den technischen Support gewendet. Wir warten auf eine "
+"Antwort vom Operator!"
+
+#: handlers/users/support_handler.py:64
+msgid "С вами хочет связаться пользователь {full_name}"
+msgstr "Der Benutzer {full_name} möchte mit Ihnen Kontakt aufnehmen"
+
+#: handlers/users/support_handler.py:79
+msgid "К сожалению, пользователь уже передумал."
+msgstr "Leider hat der Benutzer seine Meinung geändert."
+
+#: handlers/users/support_handler.py:91
+msgid ""
+"Вы на связи с пользователем!\n"
+"Чтобы завершить общение нажмите на кнопку."
+msgstr ""
+"Sie sind mit dem Benutzer verbunden!\n"
+"Klicken Sie auf die Schaltfläche, um das Gespräch zu beenden."
+
+#: handlers/users/support_handler.py:100
+msgid ""
+"Техподдержка на связи! Можете писать сюда свое сообщение. \n"
+"Чтобы завершить общение нажмите на кнопку."
+msgstr ""
+"Der technische Support ist online! Sie können hier Ihre Nachricht "
+"schreiben. \n"
+"Klicken Sie auf die Schaltfläche, um das Gespräch zu beenden."
+
+#: handlers/users/support_handler.py:115
+msgid "Дождитесь ответа оператора или отмените сеанс"
+msgstr "Warten Sie auf die Antwort des Operators oder brechen Sie die Sitzung ab"
+
+#: handlers/users/support_handler.py:131
+msgid "Пользователь завершил сеанс техподдержки"
+msgstr "Der Benutzer hat die technische Support-Sitzung beendet"
+
+#: handlers/users/support_handler.py:135
+msgid "Вы завершили сеанс и были возвращены в главное меню"
+msgstr "Sie haben die Sitzung beendet und sind zum Hauptmenü zurückgekehrt"
+
+#: handlers/users/user_profile.py:23
+msgid ""
+"Ваша анкета удалена!\n"
+"Я надеюсь вы кого-нибудь нашли"
+msgstr ""
+"Ihr Profil wurde gelöscht!\n"
+"Ich hoffe, Sie haben jemanden gefunden"
+
+#: handlers/users/verification.py:17
+msgid "Чтобы пройти верификацию вам нужно отправить свой контакт"
+msgstr "Um sich zu verifizieren, müssen Sie Ihre Kontaktdaten senden"
+
+#: handlers/users/verification.py:33
+msgid ""
+"Спасибо, {contact_full_name}.\n"
+"Ваш номер {contact_phone_number} был получен."
+msgstr ""
+"Danke, {contact_full_name}.\n"
+"Ihre Telefonnummer {contact_phone_number} wurde empfangen."
+
+#: handlers/users/verification.py:50
+msgid "Ваш номер недействителен, попробуйте еще раз."
+msgstr "Ihre Telefonnummer ist ungültig. Bitte versuchen Sie es erneut."
+
+#: handlers/users/view_event.py:27
+msgid "На данный момент вы просмотрели все существующие анкеты"
+msgstr "Sie haben derzeit alle vorhandenen Profile angesehen"
+
+#: handlers/users/view_ques.py:73
+#, fuzzy
+msgid "Жалоба успешно отправлена"
+msgstr "Ihr Konto wurde erfolgreich hinzugefügt"
+
+#: handlers/users/view_ques.py:112
+msgid ""
+"Слишком много ❤️ за сегодня.\n"
+"\n"
+"Пригласи друзей и получи больше ❤️\n"
+"\n"
+"https://t.me/{}?start={}"
+msgstr ""
+"Zu viele ❤️ für heute.\n"
+"\n"
+"Laden Sie Ihre Freunde ein und erhalten Sie mehr ❤️\n"
+"\n"
+"https://t.me/{}?start={}"
+
+#: keyboards/admin/inline/customers.py:12
+msgid "🔍 Найти пользователя"
+msgstr "🔍 Benutzer finden"
+
+#: keyboards/admin/inline/customers.py:23
+msgid "🟢 Разблокировать"
+msgstr "🟢 Freischalten"
+
+#: keyboards/admin/inline/customers.py:28
+msgid "🚫 Заблокировать"
+msgstr "🚫 Freischalten"
+
+#: keyboards/admin/inline/mailing.py:8
+msgid "📧 Рассылка"
+msgstr "📧 Verteiler"
+
+#: keyboards/admin/inline/mailing.py:16 keyboards/admin/inline/mailing.py:31
+#: keyboards/inline/admin_inline.py:9
+msgid "Подтвердить отправку"
+msgstr "Senden bestätigen"
+
+#: keyboards/admin/inline/mailing.py:19
+msgid "Добавить кнопку"
+msgstr "Schaltfläche hinzufügen"
+
+#: keyboards/admin/inline/mailing.py:21 keyboards/admin/inline/mailing.py:33
+#: keyboards/inline/cancel_inline.py:8
+msgid "Отмена"
+msgstr "Abbrechen"
+
+#: keyboards/admin/inline/payments.py:9
+msgid "⚙️ Настройки"
+msgstr "⚙️ Einstellungen"
+
+#: keyboards/admin/inline/payments.py:11
+msgid "📝 Статистика"
+msgstr "📝 Statistik"
+
+#: keyboards/admin/inline/ref.py:8
+msgid "📈 Статистика"
+msgstr "📝 Statistik"
+
+#: keyboards/admin/inline/ref.py:9 keyboards/admin/inline/setting.py:8
+msgid "*️⃣ Добавить"
+msgstr "*️⃣ Hinzufügen"
+
+#: keyboards/admin/inline/ref.py:10 keyboards/admin/inline/setting.py:9
+msgid "❌ Удалить"
+msgstr "❌ Löschen"
+
+#: keyboards/admin/inline/ref.py:11 keyboards/admin/inline/setting.py:10
+msgid "◀️ Назад"
+msgstr "◀️ Zurück"
+
+#: keyboards/admin/inline/reply_menu.py:9
+msgid "🙅🏻‍♂️ Отменить"
+msgstr "🙅🏻‍♂️ Abbrechen"
+
+#: keyboards/admin/inline/reply_menu.py:17
+msgid "👮‍♂️ Админ Состав"
+msgstr "👮‍♂️ Admin-Team"
+
+#: keyboards/admin/inline/reply_menu.py:19
+msgid "📞 Сменить контакты"
+msgstr "📞 Kontakte ändern"
+
+#: keyboards/admin/inline/reply_menu.py:29
+msgid "🗒 Выгрузить юзеров | .txt"
+msgstr "🗒 Benutzer exportieren | .txt"
+
+#: keyboards/admin/inline/reply_menu.py:32
+msgid "🗒 Выгрузить конфиги и логи"
+msgstr "🗒 Konfigurationen und Logs exportieren"
+
+#: keyboards/default/admin_default.py:8
+msgid "Рассылка"
+msgstr "Verteiler"
+
+#: keyboards/default/admin_default.py:9
+msgid "Сообщение по id"
+msgstr "Nachricht nach ID"
+
+#: keyboards/default/admin_default.py:10
+msgid "Посчитать людей и чаты"
+msgstr "Zähle Personen und Chats"
+
+#: keyboards/default/admin_default.py:11
+msgid "Мониторинг"
+msgstr "Überwachung"
+
+#: keyboards/default/admin_default.py:12
+msgid "Тех.Работа"
+msgstr "Technische Arbeit"
+
+#: keyboards/default/get_contact_default.py:8
+msgid "📱 Отправить"
+msgstr "📱 Senden"
+
+#: keyboards/default/get_location_default.py:9
+msgid "🗺 Определить автоматически"
+msgstr "🗺 Automatisch ermitteln"
+
+#: keyboards/default/get_photo.py:8
+msgid "Взять из профиля"
+msgstr "Aus dem Profil übernehmen"
+
+#: keyboards/inline/admin_inline.py:18
+msgid "Включить"
+msgstr "Einschalten"
+
+#: keyboards/inline/admin_inline.py:21
+msgid "Выключить"
+msgstr "Ausschalten"
+
+#: keyboards/inline/admin_inline.py:33
+msgid "Разблокировать"
+msgstr "Freischalten"
+
+#: keyboards/inline/back_inline.py:8
+#: keyboards/inline/change_data_profile_inline.py:15
+#: keyboards/inline/filters_inline.py:42 keyboards/inline/language_inline.py:22
+#: keyboards/inline/poster_inline.py:31 keyboards/inline/poster_inline.py:49
+#: keyboards/inline/poster_inline.py:63
+#: keyboards/inline/registration_inline.py:12
+#: keyboards/inline/settings_menu.py:12 keyboards/inline/sponsor_inline.py:10
+#: keyboards/inline/sponsor_inline.py:21
+msgid "⏪️ Вернуться в меню"
+msgstr "⏪️ Zurück zum Menü"
+
+#: keyboards/inline/cancel_inline.py:16
+#: keyboards/inline/change_data_profile_inline.py:28
+msgid "❌ Остановить"
+msgstr "❌ Beenden"
+
+#: keyboards/inline/change_data_profile_inline.py:8
+msgid "👤 Имя"
+msgstr "👤 Name"
+
+#: keyboards/inline/change_data_profile_inline.py:9
+msgid "⚧ Пол"
+msgstr "⚧ Geschlecht"
+
+#: keyboards/inline/change_data_profile_inline.py:10
+msgid "📅 Возраст"
+msgstr "📅 Alter"
+
+#: keyboards/inline/change_data_profile_inline.py:11
+msgid "🏙 Город"
+msgstr "🏙 Stadt"
+
+#: keyboards/inline/change_data_profile_inline.py:12
+msgid "📷 Фото"
+msgstr "📷 Foto"
+
+#: keyboards/inline/change_data_profile_inline.py:13
+msgid "📝 О себе"
+msgstr "📝 Über mich"
+
+#: keyboards/inline/filters_inline.py:9
+msgid "🎉 Мероприятия"
+msgstr "🎉 Veranstaltungen"
+
+#: keyboards/inline/filters_inline.py:12
+msgid "❤️ Знакомства"
+msgstr "❤️ Dating"
+
+#: keyboards/inline/filters_inline.py:14 keyboards/inline/filters_inline.py:31
+#: keyboards/inline/guide_inline.py:15
+msgid "⏪️ Назад"
+msgstr "⏪️ Zurück"
+
+#: keyboards/inline/filters_inline.py:23
+msgid "🏙️ Город партнера"
+msgstr "🏙️ Stadt deines Partners"
+
+#: keyboards/inline/filters_inline.py:26
+msgid "🔞 Возр.диапазон"
+msgstr "🔞 Altersgruppe"
+
+#: keyboards/inline/filters_inline.py:29
+msgid "🚻 Пол партнера"
+msgstr "Geschlecht des partners"
+
+#: keyboards/inline/filters_inline.py:40
+msgid "🏙️ Город"
+msgstr "🏙️ Stadt"
+
+#: keyboards/inline/guide_inline.py:21
+msgid "Вперед ➡️"
+msgstr "Los ➡️"
+
+#: keyboards/inline/guide_inline.py:25
+msgid "❌ Закрыть"
+msgstr "❌ Schließen"
+
+#: keyboards/inline/language_inline.py:13
+msgid "🇷🇺 Русский"
+msgstr "🇷🇺 Russisch"
+
+#: keyboards/inline/language_inline.py:14
+msgid "🇩🇪 Немецкий"
+msgstr "🇩🇪 Deutsch"
+
+#: keyboards/inline/language_inline.py:15
+msgid "🇬🇧 Английский"
+msgstr "🇬🇧 Englisch"
+
+#: keyboards/inline/language_inline.py:16
+msgid "🇮🇩 Индонезийский"
+msgstr "🇮🇩 Südseesprachen"
+
+#: keyboards/inline/main_menu_inline.py:26
+msgid "➕ Регистрация"
+msgstr "➕ Registrierung"
+
+#: keyboards/inline/main_menu_inline.py:28 keyboards/inline/settings_menu.py:10
+msgid "🌐 Язык"
+msgstr "🌐 Sprache"
+
+#: keyboards/inline/main_menu_inline.py:30
+msgid "👤 Моя анекта"
+msgstr "👤 Mein Profil"
+
+#: keyboards/inline/main_menu_inline.py:32
+msgid "⚙️ Фильтры"
+msgstr "⚙️ Filter"
+
+#: keyboards/inline/main_menu_inline.py:33
+msgid "💌 Найти пару"
+msgstr "💌 finden ein Paar"
+
+#: keyboards/inline/main_menu_inline.py:34
+msgid "🗓️ Афиша"
+msgstr "🗓️ Poster"
+
+#: keyboards/inline/main_menu_inline.py:35
+msgid "🆘 Поддержка"
+msgstr "🆘 Support"
+
+#: keyboards/inline/main_menu_inline.py:37
+msgid "ℹ️ Информация"
+msgstr "ℹ️ Informationen"
+
+#: keyboards/inline/menu_profile_inline.py:10
+msgid "✅ Верификация"
+msgstr "✅ Richtigkeitsprüfung"
+
+#: keyboards/inline/menu_profile_inline.py:16
+msgid "🖊️ Изменить"
+msgstr "🖊️ Ändern"
+
+#: keyboards/inline/menu_profile_inline.py:18
+msgid "🗑️ Удалить"
+msgstr "🗑️ Löschen"
+
+#: keyboards/inline/menu_profile_inline.py:19
+msgid "⏪ Назад"
+msgstr "⏪ Zurück"
+
+#: keyboards/inline/payments_inline.py:9
+msgid "💳 ЮMoney"
+msgstr "💳 YouMoney"
+
+#: keyboards/inline/payments_inline.py:16
+msgid "💳 Оплатить"
+msgstr "💳 Bezahlen"
+
+#: keyboards/inline/payments_inline.py:18
+msgid "🔄 Проверить оплату"
+msgstr "🔄 Scheckzahlung"
+
+#: keyboards/inline/poster_inline.py:21
+msgid "✍️Создать афишу"
+msgstr "Plakat erstellen"
+
+#: keyboards/inline/poster_inline.py:24
+msgid "🎭 Смотреть афиши"
+msgstr "🎭 Poster beobachten"
+
+#: keyboards/inline/poster_inline.py:27
+msgid "📝 Мои записи"
+msgstr "📝 Meine Aufzeichnungen"
+
+#: keyboards/inline/poster_inline.py:29
+msgid "📃 Моё событие"
+msgstr "📃 Mein Ereignis"
+
+#: keyboards/inline/poster_inline.py:46
+msgid "✍️ Изменить"
+msgstr "✍️ Ändern"
+
+#: keyboards/inline/poster_inline.py:58
+msgid "Название"
+msgstr "Titel"
+
+#: keyboards/inline/poster_inline.py:60
+msgid "Описание"
+msgstr "Beschreibung"
+
+#: keyboards/inline/poster_inline.py:73
+msgid "✅ Одобрить"
+msgstr "✅ Genehmigen"
+
+#: keyboards/inline/poster_inline.py:76
+msgid "❌ Отклонить"
+msgstr "Ablehnen"
+
+#: keyboards/inline/poster_inline.py:85
+msgid "Пойду!"
+msgstr "Ich gehe hin!"
+
+#: keyboards/inline/poster_inline.py:88
+msgid "Не интересно"
+msgstr "Nicht interessiert"
+
+#: keyboards/inline/poster_inline.py:91 keyboards/inline/poster_inline.py:103
+#: keyboards/inline/poster_inline.py:112
+msgid "⏪️ Остановить"
+msgstr "⏪️ Stoppen"
+
+#: keyboards/inline/poster_inline.py:101
+msgid "❌ Отменить запись"
+msgstr "❌ Eintrag abbrechen"
+
+#: keyboards/inline/questionnaires_inline.py:30
+#, fuzzy
+msgid "💤 Остановить"
+msgstr "❌ Beenden"
+
+#: keyboards/inline/questionnaires_inline.py:34
+msgid "🚫 Забанить"
+msgstr "🚫 Blockieren"
+
+#: keyboards/inline/questionnaires_inline.py:38
+msgid "Следующий"
+msgstr "Nächste Person"
+
+#: keyboards/inline/questionnaires_inline.py:74
+msgid "🚀 Смотреть"
+msgstr "🚀 Ansehen"
+
+#: keyboards/inline/questionnaires_inline.py:82
+msgid "👉 Перейти в чат"
+msgstr "👉 Zum Chat gehen"
+
+#: keyboards/inline/questionnaires_inline.py:89
+msgid "⏪️ Вернуться к просмотру анкет"
+msgstr "⏪️ Zurück zur Profilansicht"
+
+#: keyboards/inline/registration_inline.py:9
+msgid "🖌️ Пройти опрос в боте"
+msgstr "🖌️ Durchgehen Umfrage im Bot"
+
+#: keyboards/inline/registration_inline.py:21
+msgid "✅ Да все хорошо!"
+msgstr "✅ Ja, alles ist gut!"
+
+#: keyboards/inline/settings_menu.py:8
+msgid "📚 Брендбук"
+msgstr "📚 Markenbuch"
+
+#: keyboards/inline/settings_menu.py:9
+msgid "📞 Контакты"
+msgstr "📞 Kontakte"
+
+#: keyboards/inline/support_inline.py:37
+msgid "Ответить пользователю"
+msgstr "Dem Benutzer antworten"
+
+#: keyboards/inline/support_inline.py:45
+msgid "Написать оператору"
+msgstr "Schreiben Sie an den Betreiber"
+
+#: keyboards/inline/support_inline.py:60 keyboards/inline/support_inline.py:72
+msgid "Завершить сеанс"
+msgstr "Sitzung beenden"
+
+#: middlewares/BanCheck.py:44
+msgid "😢 Вы заблокированы!"
+msgstr "😢 Sie sind blockiert!"
+
+#: middlewares/IsMaintenanceCheck.py:26
+msgid "Ведутся технические работы"
+msgstr "Technische Arbeiten sind im Gange"
+
+#: middlewares/LinkCheck.py:38
+msgid ""
+"Вы подписались не на все каналы! Чтобы продолжить пользоваться ботом, "
+"подпишитесь! Ссылки ниже: "
+msgstr ""
+"Sie haben nicht alle Kanäle abonniert! Um den Bot weiterhin zu nutzen, "
+"abonnieren Sie bitte! Links unten: "
+
+#: utils/notify_admins.py:24
+msgid "Оповещение администрации..."
+msgstr ""
+
+#: utils/notify_admins.py:28
+msgid "Бот был успешно запущен"
+msgstr ""
+
+#: utils/statistics.py:16
+msgid ""
+"<b>📊 Статистика: </b>\n"
+"\n"
+"└Сейчас в нашем боте <b>{count_users} пользователей</b>\n"
+"└Из них:\n"
+"        ├<b>{users_gender_m} пользователей мужского пола</b>\n"
+"        ├<b>{users_gender_f} пользователей женского пола</b>\n"
+"        ├<b>{users_city} пользователей из города {user_city}</b>\n"
+"        ├<b>{cs_uy} пользователей из других городов</b>\n"
+"        ├<b>{users_verified} верифицированных пользователей</b>\n"
+"        ├<b>{users_status} пользователей, создавшие анкету</b>\n"
+"└Дата создания бота - <b>10.08.2021</b>"
+msgstr ""
+"<b>📊 Statistik: </b>\n"
+"\n"
+"└Derzeit sind <b>{count_users} Benutzer</b> in unserem Bot registriert.\n"
+"└Davon:\n"
+" ├<b>{users_gender_m} männliche Benutzer</b>\n"
+" ├<b>{users_gender_f} weibliche Benutzer</b>\n"
+" ├<b>{users_city} Benutzer aus der Stadt {user_city}</b>\n"
+" ├<b>{cs_uy} Benutzer aus anderen Städten</b>\n"
+" ├<b>{users_verified} verifizierte Benutzer</b>\n"
+" ├<b>{users_status} Benutzer, die ein Profil erstellt haben</b>\n"
+"└Bot-Erstellungsdatum - <b>10.08.2021</b>"
+
+#~ msgid "🗒 Логи"
+#~ msgstr "🗒 Logs"
+
+#~ msgid "Ваше новое имя: <b>{censored}</b>"
+#~ msgstr "Ihr neuer Name ist <b>{censored}</b>"
+
+#~ msgid "Ваш новый пол: <b>{}</b>"
+#~ msgstr "Dein neues Geschlecht: <b>{}</b>"
+
+#~ msgid "Отправьте мне новое описание анкеты:"
+#~ msgstr "Senden Sie mir eine neue Profilbeschreibung:"
+
+#~ msgid "Комментарий принят!"
+#~ msgstr "Kommentar akzeptiert!"
+
+#~ msgid "🫂 Пользователи"
+#~ msgstr "🫂 Benutzer"
+
+#~ msgid "📊 Реклама"
+#~ msgstr "📊 Werbung"
+
+#~ msgid "👀 Мониторинг"
+#~ msgstr "👀 Überwachung"
+
+#~ msgid "🛑 Тех.Работа"
+#~ msgstr "🛑 Tech.Arbeit"
+
+#~ msgid "Чат с админом не найден"
+#~ msgstr ""

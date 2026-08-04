@@ -1,0 +1,72 @@
+{
+  "uid": "datingbot-backend",
+  "title": "Backend Overview",
+  "tags": ["datingbot", "backend"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Backend Availability",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "up{job=\"backend\"}", "refId": "A"}],
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Requests per Second",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (method, endpoint) (rate(http_requests_total{job=\"backend\"}[5m]))", "legendFormat": "{{method}} {{endpoint}}", "refId": "A"}],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4}
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "5xx Error Rate",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (endpoint) (rate(http_requests_total{job=\"backend\",status_code=~\"5..\"}[5m]))", "legendFormat": "{{endpoint}}", "refId": "A"}],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4}
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "p95 Latency",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "histogram_quantile(0.95, sum by (le, endpoint) (rate(http_request_duration_seconds_bucket{job=\"backend\"}[5m])))", "legendFormat": "{{endpoint}}", "refId": "A"}],
+      "fieldConfig": {"defaults": {"unit": "s"}, "overrides": []},
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12}
+    },
+    {
+      "id": 5,
+      "type": "bargauge",
+      "title": "Requests by Module",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (module) (increase(http_requests_total{job=\"backend\"}[1h]))", "legendFormat": "{{module}}", "refId": "A"}],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12}
+    },
+    {
+      "id": 6,
+      "type": "logs",
+      "title": "Recent Backend Errors",
+      "datasource": {"type": "loki", "uid": "loki"},
+      "targets": [{"expr": "{service=\"backend\",environment=\"dev\"} |= \"error\"", "refId": "A"}],
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 20}
+    },
+    {
+      "id": 7,
+      "type": "traces",
+      "title": "Recent Backend Traces",
+      "datasource": {"type": "tempo", "uid": "tempo"},
+      "targets": [{"query": "{ resource.service.name = \"backend\" }", "queryType": "traceql", "refId": "A"}],
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 29}
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+services:
+  front:
+    build:
+      context: ../../front
+    restart: unless-stopped
+    ports:
+      - "5173:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  backend:
+    build:
+      context: ../../backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      APP_ENV: local
+      OBSERVABILITY_ENABLED: "false"
+      POSTGRES_HOST: backend-db
+      POSTGRES_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_URL: redis://redis:6379/0
+      NATS_URL: nats://nats:4222
+      ZITADEL_ISSUER: http://zitadel:8080
+      ZITADEL_REDIRECT_URI: http://localhost:8000/api/v1/auth/callback
+      TELEGRAM_BOT_TOKEN: ${BOT_TOKEN}
+    depends_on:
+      backend-db:
+        condition: service_healthy
+      zitadel:
+        condition: service_started
+      redis:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          urllib.request.urlopen("http://127.0.0.1:8000/api/v1/healthcheck/", timeout=3)
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  tgbot:
+    build:
+      context: ../../tgbot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_URL: redis://redis:6379/0
+      NATS_URL: nats://nats:4222
+    depends_on:
+      redis:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command: [ "redis-server", "--appendonly", "yes" ]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  nats:
+    image: nats:2.11-alpine
+    restart: unless-stopped
+    command: [ "-js", "-sd", "/data", "-m", "8222" ]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    volumes:
+      - nats_data:/data
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -qO- http://127.0.0.1:8222/healthz >/dev/null || exit 1" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  zitadel:
+    image: ghcr.io/zitadel/zitadel:latest
+    restart: unless-stopped
+    command: >
+      start-from-init
+      --masterkey "${ZITADEL_MASTER_KEY:?Set ZITADEL_MASTER_KEY in deploy/local/.env}"
+      --tlsMode disabled
+    ports:
+      - "8080:8080"
+    environment:
+      ZITADEL_EXTERNALPORT: 8080
+      ZITADEL_EXTERNALSECURE: "false"
+      ZITADEL_EXTERNALDOMAIN: localhost
+      ZITADEL_DATABASE_POSTGRES_HOST: zitadel-db
+      ZITADEL_DATABASE_POSTGRES_PORT: 5432
+      ZITADEL_DATABASE_POSTGRES_DATABASE: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: ${ZITADEL_DB_PASSWORD:?Set ZITADEL_DB_PASSWORD in deploy/local/.env}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: admin
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: ${ZITADEL_ADMIN_PASSWORD:?Set ZITADEL_ADMIN_PASSWORD in deploy/local/.env}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_NAME: Admin
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_GIVENNAME: Admin
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_ADDRESS: admin@example.com
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_VERIFIED: "true"
+    depends_on:
+      zitadel-db:
+        condition: service_healthy
+
+  zitadel-db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zitadel
+      POSTGRES_PASSWORD: ${ZITADEL_DB_PASSWORD:?Set ZITADEL_DB_PASSWORD in deploy/local/.env}
+      POSTGRES_DB: zitadel
+    volumes:
+      - zitadel_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U zitadel -d zitadel" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend-db:
+    image: postgres:16
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - app_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Set GRAFANA_ADMIN_PASSWORD in deploy/local/.env}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ../../monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../../monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+      - loki
+      - tempo
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+      - --enable-feature=exemplar-storage
+    volumes:
+      - prometheus-data:/prometheus
+      - ../../monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../../monitoring/prometheus/rules:/etc/prometheus/rules:ro
+    depends_on:
+      - otel-collector
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.153.0
+    container_name: otel-collector
+    restart: unless-stopped
+    command:
+      - --config=/etc/otelcol-contrib/otel-collector.yml
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+      - "9464:9464"
+    volumes:
+      - ../../monitoring/otel-collector/otel-collector.yml:/etc/otelcol-contrib/otel-collector.yml:ro
+    depends_on:
+      - tempo
+
+  tempo:
+    image: grafana/tempo:2.6.1
+    container_name: tempo
+    restart: unless-stopped
+    command:
+      - -config.file=/etc/tempo/tempo.yml
+    ports:
+      - "3200:3200"
+    volumes:
+      - tempo-data:/var/tempo
+      - ../../monitoring/tempo/tempo.yml:/etc/tempo/tempo.yml:ro
+
+  loki:
+    image: grafana/loki:3.2.1
+    container_name: loki
+    restart: unless-stopped
+    command:
+      - -config.file=/etc/loki/loki.yml
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki-data:/loki
+      - ../../monitoring/loki/loki.yml:/etc/loki/loki.yml:ro
+
+  promtail:
+    image: grafana/promtail:3.2.1
+    container_name: promtail
+    restart: unless-stopped
+    command:
+      - -config.file=/etc/promtail/promtail.yml
+    volumes:
+      - ../../monitoring/promtail/promtail.yml:/etc/promtail/promtail.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    depends_on:
+      - loki
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    container_name: cadvisor
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "8081:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+
+volumes:
+  zitadel_postgres_data:
+  app_postgres_data:
+  redis_data:
+  nats_data:
+  grafana-data:
+  prometheus-data:
+  loki-data:
+  tempo-data:
+
+networks:
+  default:
+    name: datingbot-local
+    driver: bridge
