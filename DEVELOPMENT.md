@@ -255,9 +255,12 @@ Repository hooks:
 ```bash
 pre-commit install
 pre-commit run --all-files
+make verify-pre-commit
 ```
 
-Note: the current pre-commit config still references `frontend/` in a few frontend hooks, while the actual directory is `front/`. Update those hooks before depending on frontend pre-commit checks.
+`make verify-pre-commit` uses the Telegram bot's locked `uv` environment for the pre-commit executable. GitHub Actions
+installs the Telegram bot and frontend dependencies before running the same repository-wide target as a required CI
+gate.
 
 ## Localization
 

@@ -9,7 +9,7 @@ INFRA_SERVICES := backend-db zitadel zitadel-db redis nats
 
 .DEFAULT_GOAL := help
 
-.PHONY: help install test lint format format-check typecheck verify
+.PHONY: help install test lint format format-check typecheck verify verify-pre-commit
 .PHONY: install-backend run-backend test-backend lint-backend format-backend format-check-backend verify-backend
 .PHONY: migrate-backend migration-backend migration-check-backend
 .PHONY: install-tgbot run-tgbot-polling run-tgbot-webhook test-tgbot lint-tgbot format-tgbot
@@ -33,6 +33,9 @@ format-check: format-check-backend format-check-tgbot ## Check formatting withou
 typecheck: typecheck-tgbot typecheck-front ## Run all configured type checkers
 
 verify: verify-backend verify-tgbot verify-front ## Run all repository checks
+
+verify-pre-commit: ## Run all pre-commit hooks across the repository
+	cd $(TGBOT_DIR) && $(UV) run pre-commit run --all-files --show-diff-on-failure
 
 install-backend: ## Install locked backend dependencies
 	cd $(BACKEND_DIR) && $(UV) sync --dev --locked

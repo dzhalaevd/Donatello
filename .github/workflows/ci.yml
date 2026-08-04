@@ -131,6 +131,43 @@ jobs:
       - name: Verify frontend
         run: make verify-front
 
+  pre-commit:
+    name: Pre-commit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
+        with:
+          enable-cache: true
+          cache-dependency-glob: |
+            tgbot/uv.lock
+            tgbot/pyproject.toml
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+
+      - name: Install Telegram bot dependencies
+        run: make install-tgbot
+
+      - name: Install frontend dependencies
+        run: make install-front
+
+      - name: Run pre-commit
+        run: make verify-pre-commit
+
   ci-success:
     name: CI success
     needs:
@@ -138,6 +175,7 @@ jobs:
       - backend
       - tgbot
       - frontend
+      - pre-commit
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -148,9 +186,15 @@ jobs:
           BACKEND_RESULT: ${{ needs.backend.result }}
           TGBOT_RESULT: ${{ needs.tgbot.result }}
           FRONTEND_RESULT: ${{ needs.frontend.result }}
+          PRE_COMMIT_RESULT: ${{ needs.pre-commit.result }}
         run: |
           if [[ "$CHANGES_RESULT" != "success" ]]; then
             echo "Changed-area detection finished with: $CHANGES_RESULT"
+            exit 1
+          fi
+
+          if [[ "$PRE_COMMIT_RESULT" != "success" ]]; then
+            echo "Pre-commit finished with: $PRE_COMMIT_RESULT"
             exit 1
           fi
 

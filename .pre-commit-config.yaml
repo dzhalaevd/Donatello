@@ -34,7 +34,7 @@ repos:
     hooks:
       - id: frontend-eslint
         name: frontend eslint
-        entry: bash -c "cd front && npm run lint:fix"
+        entry: bash -c "cd front && npm run lint"
         language: system
         pass_filenames: false
         files: ^front/.*\.(ts|tsx|js|jsx)$
@@ -48,23 +48,12 @@ repos:
 
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.14
+    rev: v0.16.1
     hooks:
       - id: ruff-format
 
       - id: ruff-check
         args: [ --fix ]
-
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.2
-    hooks:
-      - id: mypy
-        entry: python -X utf8 -m mypy
-        additional_dependencies:
-          - pydantic
-          - types-requests
-          - types-python-dateutil
-          - types-PyYAML
 
   # Dockerfile lint
   - repo: https://github.com/AleksaC/hadolint-py
