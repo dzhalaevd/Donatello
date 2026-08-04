@@ -49,6 +49,9 @@ def get_storage(config: Config) -> BaseStorage:
 
     :return: The storage object based on the configuration.
 
+    Raises:
+        RuntimeError: If Redis is enabled without Redis configuration.
+
     """
     if config.tg_bot.use_redis:
         if config.redis is None:

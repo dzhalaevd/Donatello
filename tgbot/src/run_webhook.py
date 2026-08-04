@@ -12,7 +12,7 @@ async def main() -> None:
 
     config = uvicorn.Config(
         app=app,
-        host="0.0.0.0",  # noqa: S104
+        host="0.0.0.0",  # ruff: ignore[hardcoded-bind-all-interfaces]
         port=8000,
         reload=False,
         log_level="info",

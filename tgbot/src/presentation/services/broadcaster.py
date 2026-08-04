@@ -21,7 +21,9 @@ async def send_message(
     :param text: text of the message.
     :param disable_notification: disable notification or not.
     :param reply_markup: reply markup.
-    :return: success.
+
+    Returns:
+        Whether the message was sent successfully.
     """
     try:
         await bot.send_message(
@@ -59,7 +61,9 @@ async def broadcast(
     :param text: Text of the message.
     :param disable_notification: Disable notification or not.
     :param reply_markup: Reply markup.
-    :return: Count of messages.
+
+    Returns:
+        Number of messages sent successfully.
     """
     count = 0
     try:

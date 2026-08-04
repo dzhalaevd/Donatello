@@ -13,7 +13,7 @@ class DbConfig:
     """Database configuration class.
     This class holds the settings for the database, such as host, password, port, etc.
 
-    Attributes
+    Attributes:
     ----------
     host : str
         The host where the database server is located.
@@ -41,7 +41,11 @@ class DbConfig:
         host: str | None = None,
         port: int | None = None,
     ) -> str:
-        """Constructs and returns a SQLAlchemy URL for this database configuration."""
+        """Construct a SQLAlchemy URL for this database configuration.
+
+        Returns:
+            SQLAlchemy connection URL.
+        """
         if not host:
             host = self.host
         if not port:
@@ -58,7 +62,11 @@ class DbConfig:
 
     @staticmethod
     def from_env(env: Env) -> "DbConfig":
-        """Creates the DbConfig object from environment variables."""
+        """Create the DbConfig object from environment variables.
+
+        Returns:
+            Database configuration populated from the environment.
+        """
         host = env.str("DB_HOST")
         password = env.str("POSTGRES_PASSWORD")
         user = env.str("POSTGRES_USER")
@@ -77,7 +85,11 @@ class TgBot:
 
     @staticmethod
     def from_env(env: Env) -> "TgBot":
-        """Creates the TgBot object from environment variables."""
+        """Create the TgBot object from environment variables.
+
+        Returns:
+            Telegram bot configuration populated from the environment.
+        """
         token = env.str("BOT_TOKEN")
         admin_ids = env.list("ADMINS", subcast=int)
         use_redis = env.bool("USE_REDIS")
@@ -88,7 +100,7 @@ class TgBot:
 class RedisConfig:
     """Redis configuration class.
 
-    Attributes
+    Attributes:
     ----------
     redis_pass : Optional(str)
         The password used to authenticate with Redis.
@@ -104,14 +116,22 @@ class RedisConfig:
     redis_host: str | None
 
     def dsn(self) -> str:
-        """Constructs and returns a Redis DSN (Data Source Name) for this database configuration."""
+        """Construct a Redis DSN.
+
+        Returns:
+            Redis data source name.
+        """
         if self.redis_pass:
             return f"redis://:{self.redis_pass}@{self.redis_host}:{self.redis_port}/0"
         return f"redis://{self.redis_host}:{self.redis_port}/0"
 
     @staticmethod
     def from_env(env: Env) -> "RedisConfig":
-        """Creates the RedisConfig object from environment variables."""
+        """Create the RedisConfig object from environment variables.
+
+        Returns:
+            Redis configuration populated from the environment.
+        """
         redis_pass = env.str("REDIS_PASSWORD")
         redis_port = env.int("REDIS_PORT")
         redis_host = env.str("REDIS_HOST")
@@ -126,7 +146,7 @@ class Miscellaneous:
     This class holds settings for various other parameters.
     It merely serves as a placeholder for settings that are not part of other categories.
 
-    Attributes
+    Attributes:
     ----------
     other_params : str, optional
         A string used to hold other various parameters as required (default is None).
@@ -142,7 +162,7 @@ class Config:
 
     This class holds the other configuration classes, providing a centralized point of access for all settings.
 
-    Attributes
+    Attributes:
     ----------
     tg_bot : TgBot
         Holds the settings related to the Telegram Bot.
@@ -162,10 +182,13 @@ class Config:
 
 
 def load_config(path: str | None = None) -> Config:
-    """This function takes an optional file path as input and returns a Config object.
-    :param path: The path of env file from where to load the configuration variables.
-    It reads environment variables from a .env file if provided, else from the process environment.
-    :return: Config object with attributes set as per environment variables.
+    """Load application configuration.
+
+    Args:
+        path: Optional path to an environment file.
+
+    Returns:
+        Configuration populated from the file or process environment.
     """
     # Create an Env object.
     # The Env object will be used to read environment variables.
