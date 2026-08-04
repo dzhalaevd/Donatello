@@ -33,22 +33,21 @@ Success is measured by helping people form genuine connections and eventually le
 
 ## :alembic: Built With
 
-![Python][python-shield]
-![uv][uv-shield]
-![wps][wemake-shield]
-![FastAPI][fastapi-shield]
-![SQLAlchemy][sqlalchemy-shield]
-![Pytest][pytest-shield]
-![Telegram][telegram-shield]
-![React][react-shield]
-![TypeScript][typescript-shield]
-![Vite][vite-shield]
-![PostgreSQL][postgres-shield]
-![OpenTelemetry][otel-shield]
-![Grafana][grafana-shield]
-![Prometheus][prometheus-shield]
+![Python][python-shield]\
+![uv][uv-shield]\
+![wps][wemake-shield]\
+![FastAPI][fastapi-shield]\
+![SQLAlchemy][sqlalchemy-shield]\
+![Pytest][pytest-shield]\
+![Telegram][telegram-shield]\
+![React][react-shield]\
+![TypeScript][typescript-shield]\
+![Vite][vite-shield]\
+![PostgreSQL][postgres-shield]\
+![OpenTelemetry][otel-shield]\
+![Grafana][grafana-shield]\
+![Prometheus][prometheus-shield]\
 ![Docker][docker-shield]
-
 
 ## :rocket: Quickstart
 
