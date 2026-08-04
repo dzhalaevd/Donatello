@@ -156,3 +156,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.PLAN.md
+.PLANS.md
