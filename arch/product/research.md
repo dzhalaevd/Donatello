@@ -5,17 +5,6 @@ sources, methods, results, and interpretation limits; it does not define product
 
 Product decisions derived from this evidence belong in [principles.md](./principles.md).
 
-## Research Questions
-
-The current evidence base helps address three questions:
-
-1. How common is self-reported exhaustion among dating-app users?
-2. How is sequential exposure to many profiles associated with choice and perceived overload?
-3. Which motives and usage patterns are associated with problematic Tinder use?
-
-It does not yet directly address the effectiveness of recommendation explanations, post-match support, or the effect of
-product mechanics on actual in-person meetings.
-
 ## Summary of Findings
 
 - One US market survey suggests that self-reported exhaustion is widespread, but it cannot measure clinical burnout or
@@ -29,6 +18,43 @@ product mechanics on actual in-person meetings.
   social connection motives, as well as contact intensity. The causal direction of these relationships is unknown.
 - None of the current studies establishes that a particular product design will improve real-world outcomes in Make
   Dating Free Again.
+
+## Evidence-Supported Problem Signals
+
+The sources provide grounds for treating the following as product problems worth investigating, with the stated
+limitations:
+
+- **Choice overload:** Higher profile volume increased perceived overload in one controlled online experiment, and
+  acceptance declined across sequential choices in three studies. These results do not define an optimal limit.
+- **Fatigue from repeated decisions:** Self-reported exhaustion and sequential-choice effects are consistent with this
+  concern, but the studies do not isolate every source of fatigue or establish long-term causality.
+- **Low-quality or unfinished interactions:** A market survey included inability to find a good connection and
+  repetitive conversations among reported reasons for exhaustion. It does not establish prevalence across markets or
+  prove that asynchronous communication causes those experiences.
+- **Coping, mood enhancement, and social connection motives:** These motives were associated with problematic Tinder
+  use in cross-sectional data. Direction of causality is unknown.
+- **Interaction volume without demonstrated meaningful outcomes:** Match and contact counts appear in the source set,
+  but the studies do not show that more Matches cause better outcomes. The claimed gap between Match volume and
+  Meaningful Outcomes remains incompletely measured.
+
+Here and in the source summaries, lowercase terms such as “match” or “acceptance” retain the original study's meaning;
+they must not be interpreted as the canonical product state **Match** defined in [glossary.md](./glossary.md).
+
+## Product Hypotheses, Not Findings
+
+The current product model tests whether:
+
+- a small, predictable Recommendation set and complete sessions reduce perceived overload and decision fatigue;
+- explicit Live Availability and Conversation Pairing shorten the path from Preview Interest to real interaction;
+- a short synchronous Live Conversation provides enough context for a more informed Continue Decision than profile
+  evaluation alone;
+- creating a Match only after reciprocal positive Continue Decisions reduces persistent connections that never become
+  meaningful;
+- immediate exit, block, report, privacy, and trust mechanisms make early live contact acceptable and safer;
+- removing endless feeds, streaks, variable rewards, and automatic continuation supports Intentional Usage.
+
+None of these effects is established by the studies below. Voice versus video, the minimum duration, Recommendation
+Limit, waiting design, and Post-Match Communication channel are open decisions rather than validated requirements.
 
 ## 1. Self-Reported Dating-App Exhaustion
 
@@ -57,9 +83,8 @@ This is an editorial and commercial market survey, not a peer-reviewed scientifi
 ### Interpretation Limits
 
 Combining “sometimes,” “often,” and “always” does not constitute a measure of clinical burnout. Self-report data does
-not
-establish that the app caused the exhaustion. The result describes a specific US sample and should not be presented as a
-universal prevalence estimate.
+not establish that the app caused the exhaustion. The result describes a specific US sample and should not be presented
+as a universal prevalence estimate.
 
 ## 2. Sequential Choice and the Rejection Mindset
 
@@ -172,23 +197,41 @@ The current evidence base does not establish that:
 - a particular daily recommendation limit is optimal;
 - limiting profiles alone reduces clinical burnout;
 - transparent recommendation explanations necessarily improve trust;
-- more matches produce more meaningful meetings;
+- synchronous communication is more effective than asynchronous messaging;
+- video is more effective, safer, or more comfortable than voice;
+- a particular number of minutes is sufficient for an informed Continue Decision;
+- reaching the eligibility threshold means a Live Conversation was meaningful or successful;
+- Users will want to enter a Live Conversation before persistent messaging;
+- creating a Match after a Live Conversation improves the likelihood of an Offline Meeting;
+- synchronous communication reduces ghosting;
+- more app-defined matches produce more meaningful meetings;
 - the observed effects are consistent across ages, countries, genders, orientations, and dating intentions;
 - app use causes loneliness or depressed mood.
 
 These claims may be framed as research questions, but not as findings from the studies listed above.
 
-## Evidence Gaps
+## Research Questions and Evidence Gaps
 
-The current source set does not provide direct evidence about:
+The current source set does not provide direct evidence needed to answer:
 
-- how the target audience defines overload, a good Recommendation, and a Meaningful Outcome;
-- the baseline level of self-reported exhaustion in the target market;
-- an appropriate Recommendation Limit for the target audience;
-- whether deliberate profile consideration improves real dating outcomes;
-- how Recommendation Explanations affect comprehension, trust, or confidence calibration;
-- whether Post-Match Support improves mutual participation or safe Offline Meetings;
-- whether effects differ across the segments the product intends to serve.
+1. Are target Users willing to enter synchronous communication before persistent messaging?
+2. What Dating Profile information and trust signals are necessary before a Live Conversation?
+3. Is voice, video, or a User choice between them more comfortable and accessible?
+4. How does early live contact affect anxiety, harassment risk, privacy, and perceived safety?
+5. What minimum duration, if any, is acceptable before the Continue Decision becomes available?
+6. What happens when a User leaves before that threshold, and how should the other User experience the outcome?
+7. Does synchronous communication reduce ghosting or merely move rejection earlier?
+8. Is simultaneous Live Availability sufficient across groups and times to produce acceptable waiting?
+9. How do barriers, waiting times, safety outcomes, and benefits differ across User groups?
+10. Which verification, profile, consent, moderation, and safety mechanisms are needed before a Conversation Pairing?
+11. How does the target audience define overload, a good Recommendation, and a Meaningful Outcome?
+12. What Recommendation Limit is appropriate for the target audience without creating artificial scarcity?
+13. Does deliberate profile consideration improve real dating outcomes?
+14. How do Recommendation Explanations affect comprehension, trust, and confidence calibration?
+15. Does Post-Match Support improve informed continuation or safe Offline Meetings?
+16. Which operational policy, response time, and evidence handling are required for reports and moderation?
+17. Must Recommendations connect only simultaneously live-available Users, or can Preview Interest persist across
+    availability windows without weakening the synchronous-first hypothesis?
 
 Internal surveys should be added to this review only with their questionnaire, sample description, collection dates,
 and limitations. Undocumented anonymous surveys cannot serve as reproducible evidence.
