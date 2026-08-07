@@ -1,0 +1,32 @@
+name: Greetings
+
+on:
+  issues:
+    types: [opened]
+
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  greeting:
+    name: Greet First-Time Contributors
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/first-interaction@v3
+        with:
+          issue_message: |
+            Thanks for opening your first issue! 👋
+
+            We appreciate you taking the time to contribute
+            A maintainer will take a look as soon as possible
+
+          pr_message: |
+            Thanks for your first pull request! 🎉
+
+            We appreciate your contribution
+            A maintainer will review it as soon as possible
