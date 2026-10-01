@@ -21,7 +21,6 @@ jobs:
     timeout-minutes: 10
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
-      tgbot: ${{ steps.filter.outputs.tgbot }}
       frontend: ${{ steps.filter.outputs.frontend }}
     steps:
       - name: Checkout repository
@@ -37,13 +36,6 @@ jobs:
               - 'Makefile'
               - 'ruff.toml'
               - '.flake8'
-              - '.github/workflows/ci.yml'
-            tgbot:
-              - 'tgbot/**'
-              - 'Makefile'
-              - 'ruff.toml'
-              - '.flake8'
-              - 'mypy.ini'
               - '.github/workflows/ci.yml'
             frontend:
               - 'front/**'
@@ -78,35 +70,6 @@ jobs:
 
       - name: Verify backend
         run: make verify-backend
-
-  tgbot:
-    name: Telegram bot
-    needs: changes
-    if: needs.changes.outputs.tgbot == 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
-        with:
-          enable-cache: true
-          cache-dependency-glob: |
-            tgbot/uv.lock
-            tgbot/pyproject.toml
-
-      - name: Install Telegram bot dependencies
-        run: make install-tgbot
-
-      - name: Verify Telegram bot
-        run: make verify-tgbot
 
   frontend:
     name: Frontend
@@ -149,8 +112,8 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: |
-            tgbot/uv.lock
-            tgbot/pyproject.toml
+            backend/uv.lock
+            backend/pyproject.toml
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -159,8 +122,8 @@ jobs:
           cache: npm
           cache-dependency-path: front/package-lock.json
 
-      - name: Install Telegram bot dependencies
-        run: make install-tgbot
+      - name: Install backend dependencies
+        run: make install-backend
 
       - name: Install frontend dependencies
         run: make install-front
@@ -176,7 +139,6 @@ jobs:
     needs:
       - changes
       - backend
-      - tgbot
       - frontend
       - pre-commit
     if: always()
@@ -187,7 +149,6 @@ jobs:
         env:
           CHANGES_RESULT: ${{ needs.changes.result }}
           BACKEND_RESULT: ${{ needs.backend.result }}
-          TGBOT_RESULT: ${{ needs.tgbot.result }}
           FRONTEND_RESULT: ${{ needs.frontend.result }}
           PRE_COMMIT_RESULT: ${{ needs.pre-commit.result }}
         run: |
@@ -201,7 +162,7 @@ jobs:
             exit 1
           fi
 
-          for result in "$BACKEND_RESULT" "$TGBOT_RESULT" "$FRONTEND_RESULT"; do
+          for result in "$BACKEND_RESULT" "$FRONTEND_RESULT"; do
             if [[ "$result" != "success" && "$result" != "skipped" ]]; then
               echo "Application verification finished with: $result"
               exit 1

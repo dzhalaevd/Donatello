@@ -22,12 +22,6 @@ scrape_configs:
       - targets:
           - backend:8000
 
-  - job_name: tgbot
-    metrics_path: /metrics
-    static_configs:
-      - targets:
-          - tgbot:8000
-
   - job_name: cadvisor
     static_configs:
       - targets:

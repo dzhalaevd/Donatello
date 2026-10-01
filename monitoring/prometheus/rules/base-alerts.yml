@@ -10,15 +10,6 @@ groups:
           summary: Backend is unavailable
           description: Prometheus cannot scrape the backend /metrics endpoint.
 
-      - alert: TelegramBotDown
-        expr: up{job="tgbot"} == 0
-        for: 1m
-        labels:
-          severity: warning
-        annotations:
-          summary: Telegram bot webhook is unavailable
-          description: Prometheus cannot scrape the Telegram bot /metrics endpoint.
-
       - alert: BackendHighErrorRate
         expr: sum(rate(http_requests_total{job="backend",status_code=~"5.."}[5m])) > 0.1
         for: 5m

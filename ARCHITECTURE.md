@@ -8,12 +8,10 @@ executable artifacts are the source of truth. Product intent and terminology liv
 
 ## System Summary
 
-DatingBot is a modular monorepo with three independently managed applications:
+DatingBot is a modular monorepo with two independently managed applications:
 
 - [`backend`](backend/) — a Python 3.13 FastAPI application. Authentication and identity linking are the only
   substantial product capabilities currently implemented.
-- [`tgbot`](tgbot/) — a Python 3.13 aiogram application that can consume Telegram updates through polling or a FastAPI
-  webhook.
 - [`front`](front/) — a React and TypeScript single-page application built with Vite and served by Nginx in a container.
   It is currently the Vite starter and is not integrated with the backend.
 
@@ -31,19 +29,14 @@ flowchart LR
     front -. "HTTP API not integrated yet" .-> backend["FastAPI backend"]
     browser --> backend
 
-    tg_user["Telegram user"] --> telegram["Telegram Bot API"]
-    telegram --> tgbot["aiogram bot"]
-
     backend --> app_db[("Application PostgreSQL")]
     backend --> zitadel["Zitadel"]
     zitadel --> zitadel_db[("Zitadel PostgreSQL")]
 
-    tgbot -. "optional FSM storage" .-> redis[("Redis")]
+    backend -. "not integrated" .-> redis[("Redis")]
     backend -. "not integrated" .-> nats["NATS JetStream"]
-    tgbot -. "not integrated" .-> nats
 
     backend -. "optional telemetry" .-> observability["Local observability stack"]
-    tgbot -. "optional telemetry" .-> observability
 ```
 
 ## Repository Layout
@@ -52,8 +45,6 @@ flowchart LR
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------------|
 | [`backend/src`](backend/src/)     | FastAPI entry point, REST presentation, application modules, persistence, identity adapters, logging, and telemetry |
 | [`backend/tests`](backend/tests/) | Backend test and PostgreSQL fixture scaffolding                                                                     |
-| [`tgbot/src`](tgbot/src/)         | Telegram entry points, handlers, middleware, integrations, configuration, and webhook transport                     |
-| [`tgbot/tests`](tgbot/tests/)     | Telegram webhook contract tests and a reserved package for credentialed end-to-end scenarios                        |
 | [`front/src`](front/src/)         | React application source                                                                                            |
 | [`deploy/local`](deploy/local/)   | Local Docker Compose topology                                                                                       |
 | [`monitoring`](monitoring/)       | Grafana, Prometheus, OpenTelemetry Collector, Tempo, Loki, Promtail, and cAdvisor configuration                     |
@@ -64,9 +55,8 @@ flowchart LR
 
 ## Architectural Style
 
-The repository is evolving from a Telegram-only application into a multi-surface product. The intended shape is a
-modular backend with multiple presentation surfaces rather than shared business logic embedded in controllers or bot
-handlers.
+The repository is evolving into a multi-surface product. The intended shape is a modular backend with presentation
+surfaces that keep product logic out of controllers and framework adapters.
 
 For backend work, the intended dependency direction is:
 
@@ -82,8 +72,8 @@ and identity-verifier classes from `infra` rather than depending on application-
 deepened when a second adapter or focused test double is introduced; adding interfaces with only one implementation
 would create indirection without leverage.
 
-Coding rules for preserving these seams are maintained in [`AGENTS.md`](AGENTS.md#backend-work). This document owns the
-shape and current state of the system; `AGENTS.md` owns instructions for changing it.
+Coding rules for preserving these seams are maintained in [`backend/AGENTS.md`](backend/AGENTS.md). This document owns
+the shape and current state of the system; local `AGENTS.md` files own instructions for changing it.
 
 ## Backend
 
@@ -163,27 +153,6 @@ and `advert`. These names indicate possible module seams only. They do not defin
 ownership,
 or approved product scope. New behavior still requires a specification and, where relevant, an ADR.
 
-## Telegram Bot
-
-The Telegram application uses aiogram 3 and exposes two mutually exclusive update-consumption modes:
-
-- [`run_polling.py`](tgbot/src/run_polling.py) starts long polling and is the container default;
-- [`run_webhook.py`](tgbot/src/run_webhook.py) starts a FastAPI application with `GET /health` and `POST /webhook`.
-
-Both modes create the same aiogram `Bot` and `Dispatcher`, register the same routers and middleware, notify configured
-administrators on startup, and close the bot session on shutdown. The webhook validates
-`X-Telegram-Bot-Api-Secret-Token` when a secret is configured before feeding the update to aiogram.
-
-Current user-facing behavior is limited to an echo/fallback handler. Several middleware and integration modules remain
-from the earlier Telegram application, but their presence does not mean they participate in the active flow.
-
-FSM state uses in-memory storage by default. Redis storage is implemented as an option, but `load_config()` currently
-does not construct `RedisConfig`; enabling `USE_REDIS` therefore fails fast instead of silently falling back. Database
-configuration is also present but not loaded, and the bot has no active persistence path.
-
-Polling and webhook modes must not run for the same bot token at the same time. The webhook app and backend both default
-to port 8000 when started directly, so one port must be changed if both are run on the same host.
-
 ## Frontend
 
 The frontend uses React, TypeScript, and Vite. A production container builds static assets with Node.js and serves them
@@ -201,15 +170,14 @@ a current request path.
 |------------------|---------------------------------------------------------|---------------------------------------------------------------------|
 | PostgreSQL       | Durable backend data                                    | Active for auth users and identities                                |
 | Zitadel          | OIDC authorization, token exchange, discovery, and keys | Active in backend auth                                              |
-| Telegram Bot API | Telegram update and message transport                   | Active in polling and webhook modes                                 |
+| Telegram Login   | External identity assertion                             | Active through backend payload verification                         |
 | Casdoor          | Alternative OIDC token verification                     | Code path exists; deployment is not provisioned locally             |
-| Redis            | Optional Telegram FSM state and throttling support      | Provisioned locally; configuration is not wired into the active bot |
+| Redis            | Candidate cache or ephemeral state store                | Provisioned locally; no active application consumer exists          |
 | NATS JetStream   | Candidate asynchronous messaging infrastructure         | Provisioned locally; no publishers or consumers exist               |
-| Yandex Geocoder  | Legacy geocoding adapter in the bot                     | Adapter exists; no active handler calls it                          |
 
-External payloads are untrusted at every ingress. FastAPI/Pydantic validates HTTP shapes, the Telegram webhook validates
-the optional transport secret, Telegram Login payloads are cryptographically verified, and OIDC tokens are checked
-against provider configuration and keys. Validation does not replace authorization at application-module interfaces.
+External payloads are untrusted at every ingress. FastAPI/Pydantic validates HTTP shapes, Telegram Login payloads are
+cryptographically verified, and OIDC tokens are checked against provider configuration and keys. Validation does not
+replace authorization at application-module interfaces.
 
 Secrets and credentials enter runtime processes through environment variables or local `.env` files. Frontend bundles
 must contain only public configuration.
@@ -220,7 +188,7 @@ must contain only public configuration.
 these
 groups:
 
-- applications: `front`, `backend`, and `tgbot`;
+- applications: `front` and `backend`;
 - state and messaging: application PostgreSQL, Zitadel PostgreSQL, Redis, and NATS JetStream;
 - identity: Zitadel;
 - observability: Grafana, Prometheus, OpenTelemetry Collector, Tempo, Loki, Promtail, and cAdvisor.
@@ -252,12 +220,9 @@ Prometheus + Tempo + Loki -------------------> Grafana
 container metrics -> cAdvisor -> Prometheus
 ```
 
-The Telegram bot has structured logging but does not currently install metrics or tracing in its polling or webhook
-entry points. The Prometheus configuration expects a Telegram `/metrics` endpoint that the current webhook app does not
-provide. Frontend telemetry is also not implemented. Dashboards for these applications should therefore be treated as
-provisioning scaffolds until their data sources are connected.
+Frontend telemetry is not implemented. Its dashboard uses container metrics and logs rather than browser-side signals.
 
-Telemetry privacy and cardinality rules are maintained in [`AGENTS.md`](AGENTS.md#working-rules).
+Telemetry privacy and cardinality rules are maintained in [`monitoring/AGENTS.md`](monitoring/AGENTS.md).
 
 ## Known Gaps and Near-Term Architectural Work
 
@@ -272,10 +237,10 @@ The following are current facts, not hidden assumptions:
 4. Replace the Vite starter with a frontend shell and an explicit, typed backend client before adding product behavior.
 5. Decide whether Redis and NATS have concrete use cases; wire and test them or remove their mandatory local startup
    dependency.
-6. Connect Telegram metrics/tracing or stop advertising and scraping endpoints that do not exist.
-7. Add behavior tests for authentication, identity conflicts, transaction failure, and both Telegram update modes.
-8. Record hard-to-reverse decisions under [`arch/adr`](arch/adr/) as they are made; the directory currently contains no
+6. Add behavior tests for authentication, identity conflicts, and transaction failure.
+7. Record hard-to-reverse decisions under [`arch/adr`](arch/adr/) as they are made; the directory currently contains no
    accepted ADRs.
 
 Rules for updating this document and recording ADRs are maintained in
-[`AGENTS.md`](AGENTS.md#documentation-rules).
+the local [`backend/AGENTS.md`](backend/AGENTS.md), [`deploy/AGENTS.md`](deploy/AGENTS.md), and
+[`monitoring/AGENTS.md`](monitoring/AGENTS.md) files.
