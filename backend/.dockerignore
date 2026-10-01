@@ -11,6 +11,5 @@
 .venv
 Dockerfile
 __pycache__
-bot.conf
 tests
 *.py[cod]

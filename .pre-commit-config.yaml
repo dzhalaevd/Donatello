@@ -14,9 +14,9 @@ repos:
       - id: check-added-large-files
       - id: detect-private-key
       - id: debug-statements
-        files: ^(backend|tgbot)/.*\.py$
+        files: ^backend/.*\.py$
       - id: check-ast
-        files: ^(backend|tgbot)/.*\.py$
+        files: ^backend/.*\.py$
       - id: no-commit-to-branch
         args: [ --branch=main ]
 

@@ -2,7 +2,8 @@
 
 This guide describes how to run the current DatingBot / Make Dating Free Again repository locally.
 
-The project is in transition from an older Telegram-only dating bot into a multi-surface product with backend, Telegram bot, frontend and observability services. Prefer the commands in this document over older Django-era instructions.
+The project is a multi-surface product with backend, frontend, and local observability services. Prefer the commands in
+this document over older instructions.
 
 ## Prerequisites
 
@@ -12,18 +13,13 @@ Install:
 - Python runtime managed by `uv`
 - Node.js and npm for the frontend
 - Git
-- A Telegram bot token if you run `tgbot`
 
-Both Python services require Python 3.13:
-
-- `backend` requires Python `>=3.13`
-- `tgbot` requires Python `>=3.13,<4.0`
+The backend requires Python `>=3.13`.
 
 ## Repository Layout
 
 ```text
 backend/      FastAPI API, auth, database access and migrations
-tgbot/        Telegram bot and webhook service
 front/        React + Vite frontend
 monitoring/   Grafana, Prometheus, Loki, Tempo, OpenTelemetry Collector
 arch/         Product and architecture notes
@@ -99,6 +95,8 @@ TELEGRAM_BOT_TOKEN=
 TELEGRAM_AUTH_TTL_SECONDS=86400
 ```
 
+`TELEGRAM_BOT_TOKEN` is needed only when verifying Telegram Login payloads in the backend.
+
 Install dependencies and run from the repository root:
 
 ```bash
@@ -130,33 +128,6 @@ make migrate-backend
 make migration-check-backend
 make migration-backend message="add user status"
 ```
-
-## Telegram Bot
-
-Create `tgbot/.env`:
-
-```dotenv
-BOT_TOKEN=
-ADMINS=
-USE_REDIS=false
-```
-
-The legacy example also contains variables for database, Redis, maps and payments. The current `load_config()` path used by polling reads only bot token, admins and Redis usage; add the other variables only when working on features that require them.
-
-Run polling mode:
-
-```bash
-make install-tgbot
-make run-tgbot-polling
-```
-
-Run webhook app:
-
-```bash
-make run-tgbot-webhook
-```
-
-The webhook app listens on `http://localhost:8000` by default, so do not run it on the same port as the backend unless you change one of the ports.
 
 ## Frontend
 
@@ -241,7 +212,6 @@ Or run checks for one application area:
 
 ```bash
 make verify-backend
-make verify-tgbot
 make verify-front
 ```
 
@@ -267,25 +237,5 @@ pre-commit run --all-files
 make verify-pre-commit
 ```
 
-`make verify-pre-commit` uses the Telegram bot's locked `uv` environment for the pre-commit executable. GitHub Actions
-installs the Telegram bot and frontend dependencies before running the same repository-wide target as a required CI
-gate.
-
-## Localization
-
-Telegram bot translations live in `tgbot/locales`.
-
-Extract and update messages:
-
-```bash
-cd tgbot
-uv run pybabel extract -F babel.cfg -o locales/dating.pot .
-uv run pybabel update -d locales -D dating -i locales/dating.pot
-```
-
-Compile translations:
-
-```bash
-cd tgbot
-uv run pybabel compile -d locales -D dating
-```
+`make verify-pre-commit` uses the backend's locked `uv` environment for the pre-commit executable. GitHub Actions
+installs backend and frontend dependencies before running the same repository-wide target as a required CI gate.

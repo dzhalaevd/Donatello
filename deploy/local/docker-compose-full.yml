@@ -28,7 +28,7 @@ services:
       NATS_URL: nats://nats:4222
       ZITADEL_ISSUER: http://zitadel:8080
       ZITADEL_REDIRECT_URI: http://localhost:8000/api/v1/auth/callback
-      TELEGRAM_BOT_TOKEN: ${BOT_TOKEN}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
     depends_on:
       backend-db:
         condition: service_healthy
@@ -50,23 +50,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
-
-  tgbot:
-    build:
-      context: ../../tgbot
-    restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_URL: redis://redis:6379/0
-      NATS_URL: nats://nats:4222
-    depends_on:
-      redis:
-        condition: service_healthy
-      nats:
-        condition: service_healthy
 
   redis:
     image: redis:7.4-alpine
